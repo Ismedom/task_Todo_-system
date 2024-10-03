@@ -22,11 +22,14 @@ const TodoSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        check: {
+            type: Boolean,
+            default: false,
+        },
         actions: {
             type: String,
             default: "created",
         },
-
         deadline: {
             type: String,
         },

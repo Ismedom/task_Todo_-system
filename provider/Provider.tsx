@@ -17,6 +17,7 @@ interface todoInforType {
     actions: string;
     todoCategory: string;
     deadline: string;
+    check: boolean;
 }
 
 const loadingInitail = {
@@ -34,6 +35,7 @@ const initialTodoValue: todoInforType = {
     actions: "created",
     todoCategory: "",
     deadline: "",
+    check: false,
 };
 
 interface ContextProps {

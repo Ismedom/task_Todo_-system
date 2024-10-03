@@ -1,8 +1,6 @@
 "use client";
 
 import { contextInfor } from "@/provider/Provider";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface EditTodoPros {
@@ -47,7 +45,6 @@ const EditTodo = ({
         updateTodo(updateTodoId, editTodoObj);
         setEditTodoObj((prev) => ({ ...prev, taskName: "", description: "", status: false }));
         setEditorVisibility(false);
-        setUpdateTodoId("");
         setCompletedId("");
     };
 
@@ -56,6 +53,11 @@ const EditTodo = ({
             setEditorVisibility(true);
         }
     }, [updateTodoId]);
+
+    useEffect(() => {
+        if (editorVisibility) document.body.style.overflowY = "hidden";
+        else document.body.style.overflowY = "auto";
+    }, [editorVisibility]);
 
     return (
         <>
@@ -72,46 +74,52 @@ const EditTodo = ({
                     {/*  */}
                     <form
                         onSubmit={(e) => handleUpdate(e)}
-                        className="px-3 py-3 md:px-6 md:py-6 flex flex-col my-3 gap-3 max-w-[500px] bg-gray-100 w-full relative rounded-md shadow-md">
-                        <h2>Up to date your todo!</h2>
-                        <FontAwesomeIcon
-                            icon={faXmark}
-                            onClick={() => {
-                                setUpdateTodoId("");
-                                setEditorVisibility(false);
-                            }}
-                            className="absolute right-3 top-2 cursor-pointer w-4 h-4 hover:bg-red-500 hover:text-gray-200 rounded-full p-1"
-                        />
-                        <input
-                            type="text"
-                            placeholder="project name..."
-                            maxLength={40}
-                            className="px-3 py-1 rounded-lg border border-gray-300 outline-none focus:border-gray-400"
-                            value={editTodoObj.taskName}
-                            onChange={(e) => setEditTodoObj((prev) => ({ ...prev, taskName: e.target.value }))}
-                        />
-                        <input
-                            type="text"
-                            placeholder="description..."
-                            className="px-3 py-1 rounded-lg border border-gray-300 outline-none focus:border-gray-400"
-                            value={editTodoObj.description}
-                            onChange={(e) => setEditTodoObj((prev) => ({ ...prev, description: e.target.value }))}
-                        />
-                        <div className="flex items-center gap-2 ">
-                            <label htmlFor="checkboxStatus">Status</label>
+                        className="px-5 py-5 md:px-6 md:py-6 flex flex-col my-3 gap-3 max-w-[500px] bg-gray-100 w-full relative rounded-md shadow-md border border-gray-300">
+                        <h2 className="text-gray-600 font-bold border-b border-b-gray-300 pb-2 mb-2 select-none">
+                            Up to date your todo!
+                        </h2>
+
+                        <div className="flex flex-col gap-1">
+                            <label htmlFor="taskName" className="text-gray-600 text-sm px-1 select-none w-max">
+                                Task Name
+                            </label>
                             <input
-                                id="checkboxStatus"
-                                type="checkbox"
-                                className="cursor-pointer scale-125"
-                                checked={editTodoObj.status}
-                                onChange={(e) => setEditTodoObj((prev) => ({ ...prev, status: e.target.checked }))}
+                                type="text"
+                                id="taskName"
+                                maxLength={40}
+                                className="px-3 py-2 rounded-lg border text-gray-500 bg-gray-50 border-gray-200 outline-none focus:border-gray-400 focus:text-gray-600"
+                                value={editTodoObj.taskName}
+                                onChange={(e) => setEditTodoObj((prev) => ({ ...prev, taskName: e.target.value }))}
                             />
                         </div>
-                        <button
-                            type="submit"
-                            className="bg-green-600 hover:bg-green-700 text-gray-200 max-w-[120px] py-[5px] rounded-lg">
-                            Update
-                        </button>
+                        {/*  */}
+                        <div className="flex flex-col gap-1">
+                            <label htmlFor="description" className="text-gray-600 text-sm px-1 select-none w-max">
+                                description
+                            </label>
+                            <input
+                                type="text"
+                                id="description"
+                                className="px-3 py-2 rounded-lg border text-gray-500 bg-gray-50 border-gray-200 outline-none focus:border-gray-400 focus:text-gray-600"
+                                value={editTodoObj.description}
+                                onChange={(e) => setEditTodoObj((prev) => ({ ...prev, description: e.target.value }))}
+                            />
+                        </div>
+                        <div className="flex justify-end px-2 gap-2 pt-3">
+                            <div
+                                onClick={() => {
+                                    setUpdateTodoId("");
+                                    setEditorVisibility(false);
+                                }}
+                                className="bg-red-400 hover:bg-red-500 text-red-900 max-w-[120px] py-[5px] rounded-lg px-3 cursor-pointer select-none">
+                                Cancel
+                            </div>
+                            <button
+                                type="submit"
+                                className="bg-green-400 hover:bg-green-500 text-green-900 max-w-[120px] py-[5px] rounded-lg px-3">
+                                Update
+                            </button>
+                        </div>
                     </form>
                 </div>
             ) : null}

@@ -12,6 +12,7 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import SkeletonLoader from "@/components/loading/SkelLoading";
 import SubNavBar from "@/components/common/SubNavBar";
 import Header from "@/components/common/Header";
+import TextLoading from "@/components/loading/TextLoading";
 
 interface contextHomePageType {
     searchTodo: (querySearch: string) => Promise<void>;
@@ -42,6 +43,7 @@ const Page = () => {
 
     const [updateTodoId, setUpdateTodoId] = useState("");
     const [editorVisibility, setEditorVisibility] = useState(false);
+    const [pages, setPages] = useState(2);
 
     const displayArray = useMemo(() => {
         const filteredArray = filterArray(universalArray, category, todoFilters);
@@ -58,6 +60,27 @@ const Page = () => {
             console.error(error);
         } finally {
             setLoading((prev) => ({ ...prev, fetchTodoLoading: false }));
+        }
+    };
+
+    const fetchMoreTodo = async (currentPage: number = 1, itemPerPage: number = 10) => {
+        try {
+            setLoading((prev) => ({ ...prev, loadMoreTodoLoading: true }));
+
+            const response = await axios.get(
+                `/api/todos/moreTodo?currentPage=${currentPage}&itemPerPage=${itemPerPage}`
+            );
+
+            setUniversalArray((prev) => {
+                const newTodos = response.data.filter(
+                    (newTodo: any) => !prev.some((existingTodo: any) => existingTodo._id === newTodo._id)
+                );
+                return [...prev, ...newTodos];
+            });
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading((prev) => ({ ...prev, loadMoreTodoLoading: false }));
         }
     };
 
@@ -147,9 +170,16 @@ const Page = () => {
     };
 
     /*
-     function for handleCreateTodo
+     function 
+     
 
      */
+
+    function fetchMoreTodoHandler(pages: number, itemPerPage: number = 12) {
+        setPages((prev) => prev + 1);
+        fetchMoreTodo(pages, itemPerPage);
+    }
+
     function handleCreateTodo(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         addTodo(todoInfor);
@@ -160,6 +190,7 @@ const Page = () => {
             deadline: "",
             actions: "created",
             todoCategory: "",
+            check: false,
         });
     }
 
@@ -179,9 +210,13 @@ const Page = () => {
     /*
 
     */
+
+    useEffect(() => {
+        console.log(category);
+    }, [category]);
     return (
         <contextHomePage.Provider value={information}>
-            <main>
+            <main className="pr-3 md:pr-4">
                 <div className="sticky top-0 bg-white z-[900]">
                     <Header />
                     <SubNavBar />
@@ -209,6 +244,15 @@ const Page = () => {
                         setEditorVisibility,
                     }}
                 />
+                {universalArray.length > 0 && !category && !todoFilters ? (
+                    <div className="flex justify-center py-6 pb-8">
+                        <button
+                            onClick={() => fetchMoreTodoHandler(pages)}
+                            className="py-2 px-3 bg-blue-500 hover:bg-blue-600 text-gray-100 rounded-md">
+                            {loading.loadMoreTodoLoading ? <TextLoading /> : "see more"}
+                        </button>
+                    </div>
+                ) : null}
             </main>
         </contextHomePage.Provider>
     );

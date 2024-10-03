@@ -1,13 +1,13 @@
 "use client";
 
 import VerticalSkelLoading from "@/components/loading/VerticalSkelLoading";
-import NotificationCard from "@/components/notification/NotificationCard";
+import NotificationMarkCard from "@/components/notification/NotificationMarkCard";
 import useSocket from "@/hooks/useSocket";
 import { contextInfor } from "@/provider/Provider";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
     const { notificationArray, setNotificationArray } = useContext<any>(contextInfor);
     const [isLoading, setIsloading] = useState(false);
     const { tasks } = useSocket();
@@ -34,6 +34,12 @@ const page = () => {
         });
     }, [tasks]);
 
+    if (!(notificationArray.length > 0)) return <div>No, Notification has been read!</div>;
+
+    const item = notificationArray.filter((item: any) => item.status && item.actions === "uncompleted" && !item.check);
+
+    if (!(item.length > 0)) return <div>No, Notification was been found</div>;
+
     return (
         <div className="flex flex-col gap-2">
             {isLoading ? (
@@ -46,18 +52,17 @@ const page = () => {
                             taskName,
                             status,
                             actions,
+                            check,
                         }: {
                             _id: string;
                             taskName: string;
                             status: boolean;
                             actions: string;
-                        }) => (
-                            <>
-                                {status && actions === "uncompleted" ? (
-                                    <NotificationCard key={_id} _id={_id} title={taskName} status={status} />
-                                ) : null}
-                            </>
-                        )
+                            check: boolean;
+                        }) =>
+                            status && !check && actions === "uncompleted" ? (
+                                <NotificationMarkCard key={_id} _id={_id} title={taskName} status={status} />
+                            ) : null
                     )}
                 </>
             )}
@@ -65,4 +70,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

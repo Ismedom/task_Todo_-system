@@ -1,6 +1,7 @@
 interface Todo {
     taskName: string;
     createdAt: string;
+    deadline: string;
 }
 
 function sortTodoArray(array: Todo[], option: string): Todo[] {
@@ -13,6 +14,12 @@ function sortTodoArray(array: Todo[], option: string): Todo[] {
 
         case "latest":
             return array.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+
+        case "deadline-old-to-new":
+            return array.sort((a, b) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime());
+
+        case "deadline-new-to-old":
+            return array.sort((a, b) => new Date(b.deadline).getTime() - new Date(a.deadline).getTime());
 
         default:
             return array;

@@ -55,7 +55,7 @@ export default function ProductPage() {
                 </div>
                 <Link
                     href="/tasks"
-                    className="bg-red-700 hover:bg-red-600 transition-colors py-1 px-4 rounded-3xl text-gray-200 mt-4 block text-center max-w-full md:max-w-[350px]">
+                    className="bg-red-700 hover:bg-red-600 transition-colors py-1 px-4 rounded-3xl text-gray-200 mt-4 block text-center max-w-full md:max-w-[350px] select-none">
                     <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
                     Back
                 </Link>

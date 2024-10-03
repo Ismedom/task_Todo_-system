@@ -8,10 +8,10 @@ const page: React.FC = () => {
     const features = [
         "Add, edit, and delete tasks",
         "Mark tasks as completed",
-        "Filter tasks by status (completed, pending)",
-        "Responsive design for mobile and desktop",
-        "Realtime Update, expire date",
-        "Authenication for user the service",
+        "Filter tasks by date created, category, status",
+        "Responsive design for both mobile and desktop",
+        "Real-time updates with task expiration dates",
+        "User authentication for personalized access",
     ];
     const techStack = [
         "Nextjs",
@@ -20,17 +20,20 @@ const page: React.FC = () => {
         "Headless UI",
         "Node.js (for backend)",
         "Socket.io",
-        "Nextauth",
+        "NextAuth",
     ];
 
     return (
-        <div className="py-4 md:pl-3 pr-2">
-            <TodoDescription
-                projectName={projectName}
-                description={description}
-                features={features}
-                techStack={techStack}
-            />
+        <div>
+            <div className="py-4 md:pl-3 pr-2">
+                <TodoDescription
+                    projectName={projectName}
+                    description={description}
+                    features={features}
+                    techStack={techStack}
+                />
+            </div>
+            <p className="flex text-blue-600">@copyright devon Ethan(ismedom)</p>
         </div>
     );
 };

@@ -21,6 +21,8 @@ const sorts = [
     { id: 1, name: "newest", stringValue: "Newest" },
     { id: 2, name: "name", stringValue: "Name" },
     { id: 3, name: "latest", stringValue: "Latest" },
+    { id: 4, name: "deadline-old-to-new", stringValue: "Due Soon" },
+    { id: 5, name: "deadline-new-to-old", stringValue: "Due Later" },
 ];
 
 const SubNavBar = () => {

@@ -52,7 +52,7 @@ const TodoCart = ({
                 <div onClick={() => setOptionVisibility(false)} className="absolute inset-0 z-[990]"></div>
             ) : null}
             <article
-                className={`border border-gray-200 rounded-md min-w-full min-h-[190px] p-3 relative shadow-md ${
+                className={`border border-gray-200 rounded-md min-w-full min-h-[195px] p-5 relative shadow-md ${
                     loading.deleteTodoLoading && deleteTodoId == _id ? "bg-red-400" : ""
                 }`}
                 key={_id}>
@@ -105,7 +105,7 @@ const TodoCart = ({
                     ) : null}
                 </div>
 
-                <h3 className="text-lg font-bold">{taskName}</h3>
+                <h3 className="text-lg font-bold text-gray-600">{taskName}</h3>
                 <p className="text-[14px] text-gray-500 line-clamp-3">{description}</p>
                 <p
                     className={`text-[14px] flex gap-1 items-center ${
@@ -139,10 +139,10 @@ const TodoCart = ({
                 <div className="border-t border-t-gray-200 pt-2 absolute left-3 flex justify-between items-center bottom-3 w-[calc(100%-24px)]">
                     <div className="flex justify-between items-center w-full bottom-[12px] left-0">
                         <Link
-                            href={`/tasks/${_id}`}
+                            href={`/tasks/details/${_id}`}
                             id={_id}
                             onClick={(e) => setTodoDetailId(e.currentTarget.id)}
-                            className="border bg-blue-500 hover:bg-blue-600 transition-all duration-100 text-gray-200 px-3 py-[3px] rounded-2xl text-sm">
+                            className="border bg-blue-100 hover:bg-blue-200 transition-all duration-100 text-blue-900 px-3 py-[3px] rounded-md text-[13px]">
                             Preview
                         </Link>
                     </div>

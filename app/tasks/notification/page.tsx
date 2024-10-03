@@ -7,7 +7,7 @@ import { contextInfor } from "@/provider/Provider";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 
-const page = () => {
+const NewNotification = () => {
     const { notificationArray, setNotificationArray } = useContext<any>(contextInfor);
     const [isLoading, setIsloading] = useState(false);
     const { tasks } = useSocket();
@@ -32,10 +32,11 @@ const page = () => {
             const newTasks = tasks.filter((task) => !prev.some((existingTask: any) => existingTask._id === task._id));
             return [...prev, ...newTasks];
         });
-
-        console.log(tasks);
     }, [tasks]);
 
+    if (!(notificationArray.length > 0)) return <div>No, Notification yet!</div>;
+    const existingNotification = notificationArray.filter((item: any) => item.actions == "uncompleted" && !item.status);
+    if (!(existingNotification.length > 0)) return <div>No notification</div>;
     return (
         <div className="flex flex-col gap-2">
             {isLoading ? (
@@ -53,13 +54,10 @@ const page = () => {
                             taskName: string;
                             status: boolean;
                             actions: string;
-                        }) => (
-                            <>
-                                {!status && actions === "uncompleted" ? (
-                                    <NotificationCard _id={_id} title={taskName} status={status} />
-                                ) : null}
-                            </>
-                        )
+                        }) =>
+                            !status && actions === "uncompleted" ? (
+                                <NotificationCard key={_id} _id={_id} title={taskName} status={status} />
+                            ) : null
                     )}
                 </>
             )}
@@ -67,4 +65,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default NewNotification;

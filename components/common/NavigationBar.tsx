@@ -1,9 +1,9 @@
 "use client";
 
-import { BellIcon, InfoIcon, ListIcon, User } from "lucide-react";
-import Link from "next/link";
+import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import React from "react";
+import Link from "next/link";
+import { BellIcon, InfoIcon, LayoutDashboard, User } from "lucide-react";
 import Profile from "../ui/Profile";
 
 const NavigationBar = () => {
@@ -12,27 +12,22 @@ const NavigationBar = () => {
     const navbarData = [
         {
             id: 1,
-            text: "Todo",
+            text: "Dashboard",
             value: "",
-            href: "/tasks",
-            icon: <ListIcon className="size-4 translate-y-[1px]" aria-hidden="true" />,
+            href: pathname.startsWith("/tasks/details") ? `/tasks/details/${pathname.split("/")[3]}` : `/tasks`,
+            icon: <LayoutDashboard className="size-4 translate-y-[1px]" aria-hidden="true" />,
         },
         {
             id: 2,
-            text: "Profile",
-            value: "profile",
-            href: "/tasks/profile",
-            icon: <User className="size-4 translate-y-[1px]" aria-hidden="true" />,
-        },
-        {
-            id: 3,
             text: "Notification",
             value: "notification",
-            href: pathname == "/tasks/notification/mark" ? "/tasks/notification/mark" : "/tasks/notification",
+            href: pathname.startsWith("/tasks/notification/mark")
+                ? `/tasks/notification/mark${pathname.split("/tasks/notification/mark")[1] || ""}`
+                : `/tasks/notification${pathname.split("/tasks/notification")[1] || ""}`,
             icon: <BellIcon className="size-4 translate-y-[1px]" aria-hidden="true" />,
         },
         {
-            id: 4,
+            id: 3,
             text: "About",
             value: "about",
             href: "/tasks/about",
@@ -41,7 +36,7 @@ const NavigationBar = () => {
     ];
 
     return (
-        <div className="sticky top-0 h-[100vh] border border-gray-200 shadow-sm">
+        <div className="border h-full border-gray-200 shadow-sm">
             <div className="border-b border-b-gray-300 bg-gray-200 px-4 py-5 md:py-6 lg:py-7">
                 <Profile />
             </div>
@@ -55,13 +50,13 @@ const NavigationBar = () => {
                                 ? "text-gray-100 border bg-blue-500 font-bold"
                                 : "text-gray-500 hover:bg-gray-200 hover:text-gray-500"
                         }`}>
-                        {icon}
+                        <div className="translate-y-[-1px]">{icon}</div>
                         <span>{text}</span>
                     </Link>
                 ))}
             </nav>
             <div className="absolute bottom-5 w-full flex justify-center">
-                <button className="bg-red-800  hover:bg-red-700 text-gray-200 px-3 md:px-4 py-1 w-[80%] text-center rounded-md">
+                <button className="bg-red-800 hover:bg-red-700 text-gray-200 px-3 md:px-4 py-1 w-[80%] text-center rounded-md">
                     Sign out
                 </button>
             </div>
