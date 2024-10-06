@@ -20,7 +20,7 @@ const NotificationMarkCard = ({ _id, title, status }: { _id: string; title: stri
                         </span>
                     )}
                 </div>
-                <p className="text-blue-400 text-sm select-none">Check but tasks doesn't complete!</p>
+                <p className="text-blue-400 text-sm select-none">Check but tasks doesn&apos;t complete!</p>
             </Link>
             <Trash
                 onClick={() => deleteNotification(_id)}

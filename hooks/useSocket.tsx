@@ -8,7 +8,7 @@ import { io, Socket } from "socket.io-client";
 //     completed: boolean;
 // }
 
-export default function useSocket() {
+export default function UseSocket() {
     const [tasks, setTasks] = useState<any[]>([]);
     const socketRef = useRef<Socket | null>(null);
 

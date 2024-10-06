@@ -8,10 +8,10 @@ import { useParams } from "next/navigation";
 import React, { useContext } from "react";
 
 const NotificationDetails = () => {
-    const { notificationArray } = useContext<any>(contextInfor);
+    const { notificationArray } = useContext(contextInfor);
     const param = useParams();
 
-    const filterItem = notificationArray.find((item: any) => item._id === param.notificationId);
+    const filterItem = notificationArray.find((item) => item._id === param.notificationId);
 
     if (!filterItem) {
         return <div>Notification not found.</div>;

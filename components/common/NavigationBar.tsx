@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { BellIcon, InfoIcon, LayoutDashboard, User } from "lucide-react";
+import { BellIcon, InfoIcon, LayoutDashboard } from "lucide-react";
 import Profile from "../ui/Profile";
 
 const NavigationBar = () => {

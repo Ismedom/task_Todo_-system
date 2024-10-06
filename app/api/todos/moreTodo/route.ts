@@ -14,8 +14,7 @@ export async function GET(req: NextRequest) {
             .limit(itemPerPage);
 
         return NextResponse.json(todos, { status: 200 });
-    } catch (error) {
-        console.error("Error fetching todos:", error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    } catch {
+        return NextResponse.json({ error: "Server Error" }, { status: 500 });
     }
 }

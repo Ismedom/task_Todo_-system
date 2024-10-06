@@ -25,8 +25,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string; 
         if (!todo) return NextResponse.json({ error: "Todo not found" }, { status: 404 });
 
         return NextResponse.json(todo, { status: 200 });
-    } catch (error) {
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    } catch {
+        return NextResponse.json({ error: "Failed to Update todo!" }, { status: 500 });
     }
 }
 
@@ -44,7 +44,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
         await Todo.findByIdAndDelete(id);
 
         return NextResponse.json({ DeleteStatus: "success" }, { status: 200 });
-    } catch (error) {
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    } catch {
+        return NextResponse.json({ error: "Failed to delete todo!" }, { status: 500 });
     }
 }

@@ -2,36 +2,25 @@
 "use client";
 
 import NotificationNav from "@/components/common/NotificationNav";
+import UseDeleteNotification from "@/hooks/notificationHook/useDeleteNotification";
+import UseupdateTodoStatus from "@/hooks/notificationHook/useupdateTodoStatus";
 import NotificationProvider from "@/provider/NotificationProvider";
-import { contextInfor } from "@/provider/Provider";
-import axios from "axios";
-import React, { createContext, useContext } from "react";
-export const notificationContext = createContext<any>(null);
+import React, { createContext } from "react";
+
+interface InotificationContext {
+    updateTodoStatus: (id: string) => void;
+    deleteNotification: (id: string) => void;
+}
+const initialValue = {
+    updateTodoStatus: () => {},
+    deleteNotification: () => {},
+};
+
+export const notificationContext = createContext<InotificationContext>(initialValue);
 
 const layout = ({ children }: { children: React.ReactNode }) => {
-    const { notificationArray, setNotificationArray } = useContext<any>(contextInfor);
-    const updateTodoStatus = async (id: string) => {
-        try {
-            const response = await axios.put(`/api/todos/notification/${id}`);
-            setNotificationArray((prev: any) => {
-                const newTasks = prev.filter((task: any) => task._id !== id);
-                return [...newTasks, response.data];
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    const deleteNotification = async (id: string) => {
-        try {
-            const response = await axios.put(`/api/todos/notification/deleteNotification/${id}`);
-            setNotificationArray((prev: any) => {
-                const newTasks = prev.filter((task: any) => task._id !== id);
-                return [...newTasks, response.data];
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    const updateTodoStatus = UseupdateTodoStatus();
+    const deleteNotification = UseDeleteNotification();
 
     const notificationContextInfor = { updateTodoStatus, deleteNotification };
     return (

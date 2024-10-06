@@ -1,19 +1,9 @@
 "use client";
 
 import { contextInfor } from "@/provider/Provider";
-import { faX, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-// import CustomSelect from "../ui/Select";
-
-// const categories = [
-//     { id: 1, name: "", stringValue: "All Category" },
-//     { id: 2, name: "work", stringValue: "Work" },
-//     { id: 3, name: "personal", stringValue: "Personal" },
-//     { id: 4, name: "shopping", stringValue: "Shopping" },
-//     { id: 5, name: "fitness", stringValue: "Fitness" },
-//     { id: 6, name: "errands", stringValue: "Errands" },
-// ];
 
 interface handleCreateTodoPros {
     handleCreateTodo: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -34,7 +24,7 @@ const FormCreateTodo = ({ handleCreateTodo }: handleCreateTodoPros) => {
         else document.body.style.overflowY = "auto";
     }, [createTodoAction]);
 
-    function handleSubmit(e: any, still: boolean) {
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>, still: boolean) {
         handleCreateTodo(e);
         if (!still) setCreateTodoAction({ display: false });
     }

@@ -1,12 +1,19 @@
 "use client";
 
+import { todoInforType } from "@/interface/interface";
 import { contextInfor } from "@/provider/Provider";
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+interface editTodoObjPros {
+    taskName: string;
+    description: string;
+    status: boolean;
+    actions: string;
+}
 
 interface EditTodoPros {
     updateTodoId: string;
-    universalArray: any;
-    updateTodo: (id: string, obj: any) => void;
+    universalArray: todoInforType[];
+    updateTodo: (id: string, obj: editTodoObjPros) => void;
     setUpdateTodoId: Dispatch<SetStateAction<string>>;
     editorVisibility: boolean;
     setEditorVisibility: Dispatch<SetStateAction<boolean>>;
@@ -27,7 +34,7 @@ const EditTodo = ({
         actions: "created",
     });
     const { setCompletedId } = useContext(contextInfor);
-    const editItem = universalArray.find((item: any) => item._id === updateTodoId);
+    const editItem = universalArray.find((item: todoInforType) => item._id === updateTodoId);
 
     useEffect(() => {
         if (editItem) {

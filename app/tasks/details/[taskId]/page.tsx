@@ -2,26 +2,27 @@
 
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import { contextInfor } from "@/provider/Provider";
+import { contextInfor, initialTodoValue } from "@/provider/Provider";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import formatDate from "@/functions/formatDate";
+import { todoInforType } from "@/interface/interface";
 
 export default function ProductPage() {
     const { universalArray } = useContext(contextInfor);
     const params = useParams();
-    const [detailItem, setDetailItem] = useState<any | null>(null);
+    const [detailItem, setDetailItem] = useState<todoInforType>(initialTodoValue);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (params.productId) {
-            const item = universalArray.find((item) => item._id === params.productId);
-            setDetailItem(item);
+        if (params.taskId) {
+            const item = universalArray.find((item) => item._id === params.taskId);
+            setDetailItem(item as todoInforType);
         }
         setIsLoading(false);
-    }, [params.productId, universalArray]);
+    }, [params.taskId, universalArray]);
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -48,9 +49,11 @@ export default function ProductPage() {
                         {detailItem.todoCategory}
                     </p>
                     <div className="flex flex-col space-y-2">
-                        <p className="text-sm text-gray-600">Created: {formatDate(detailItem.createdAt)}</p>
-                        <p className="text-sm text-gray-600">Updated: {formatDate(detailItem.updatedAt)}</p>
-                        <p className="text-sm text-gray-600">Deadline: {formatDate(detailItem.deadline, false)}</p>
+                        <p className="text-sm text-gray-600">Created: {formatDate(detailItem.createdAt as string)}</p>
+                        <p className="text-sm text-gray-600">Updated: {formatDate(detailItem.updatedAt as string)}</p>
+                        <p className="text-sm text-gray-600">
+                            Deadline: {formatDate(detailItem.deadline as string, false)}
+                        </p>
                     </div>
                 </div>
                 <Link
