@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         const item = await Todo.findOneAndUpdate({ _id: id }, { status: true }, { new: true });
         if (!item) return NextResponse.json({ error: "Not found!" }, { status: 404 });
         return NextResponse.json(item, { status: 200 });
-    } catch (error) {
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    } catch {
+        return NextResponse.json({ error: "Server Error" }, { status: 500 });
     }
 }

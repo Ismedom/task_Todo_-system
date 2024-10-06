@@ -7,173 +7,47 @@ import filterArray from "@/functions/filter";
 import search from "@/functions/search";
 import sortTodoArray from "@/functions/sort";
 import { contextInfor } from "@/provider/Provider";
-import axios from "axios";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import SkeletonLoader from "@/components/loading/SkelLoading";
 import SubNavBar from "@/components/common/SubNavBar";
 import Header from "@/components/common/Header";
 import TextLoading from "@/components/loading/TextLoading";
-
-interface contextHomePageType {
-    searchTodo: (querySearch: string) => Promise<void>;
-    fetchTodo: () => Promise<void>;
-}
+import UseFetchData from "@/hooks/todoHook/useFetchData";
+import UseFetchMoreTodo from "@/hooks/todoHook/useFetchMoreTodo";
+import UseSearchingTodo from "@/hooks/todoHook/useSearchingTodo";
+import UseAddTodo from "@/hooks/todoHook/useAddTodo";
+import UseUpdateTodo from "@/hooks/todoHook/useUpdateTodo";
+import UseUpdateCompeteTodo from "@/hooks/todoHook/useUpdateCompeteTodo";
+import UseDeleteTodo from "@/hooks/todoHook/useDeleteTodo";
+import { contextHomePageType } from "@/interface/interface";
 
 const initialValue: contextHomePageType = {
-    searchTodo: async (querySearch: string) => {},
+    searchTodo: async () => {},
     fetchTodo: async () => {},
 };
 
 export const contextHomePage = createContext(initialValue);
 
 const Page = () => {
-    const {
-        todoInfor,
-        setTodoInfor,
-        universalArray,
-        setUniversalArray,
-        sort,
-        searchValue,
-        category,
-        todoFilters,
-        loading,
-        setLoading,
-        onlineSearch,
-    } = useContext(contextInfor);
+    const { todoInfor, setTodoInfor, universalArray, sort, searchValue, category, todoFilters, loading, onlineSearch } =
+        useContext(contextInfor);
 
     const [updateTodoId, setUpdateTodoId] = useState("");
     const [editorVisibility, setEditorVisibility] = useState(false);
     const [pages, setPages] = useState(2);
+    const fetchTodo = UseFetchData();
+    const fetchMoreTodo = UseFetchMoreTodo();
+    const searchTodo = UseSearchingTodo();
+    const addTodo = UseAddTodo();
+    const updateTodo = UseUpdateTodo();
+    const updateCompletedTodo = UseUpdateCompeteTodo();
+    const deleteTodo = UseDeleteTodo();
 
     const displayArray = useMemo(() => {
         const filteredArray = filterArray(universalArray, category, todoFilters);
         const searchArray = searchValue && !onlineSearch ? search(filteredArray, searchValue) : filteredArray;
         return sortTodoArray(searchArray, sort);
     }, [universalArray, sort, searchValue, category, todoFilters]);
-
-    const fetchTodo = async () => {
-        try {
-            setLoading((prev) => ({ ...prev, fetchTodoLoading: true }));
-            const response = await axios.get("/api/todos");
-            setUniversalArray(response.data || []);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading((prev) => ({ ...prev, fetchTodoLoading: false }));
-        }
-    };
-
-    const fetchMoreTodo = async (currentPage: number = 1, itemPerPage: number = 10) => {
-        try {
-            setLoading((prev) => ({ ...prev, loadMoreTodoLoading: true }));
-
-            const response = await axios.get(
-                `/api/todos/moreTodo?currentPage=${currentPage}&itemPerPage=${itemPerPage}`
-            );
-
-            setUniversalArray((prev) => {
-                const newTodos = response.data.filter(
-                    (newTodo: any) => !prev.some((existingTodo: any) => existingTodo._id === newTodo._id)
-                );
-                return [...prev, ...newTodos];
-            });
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading((prev) => ({ ...prev, loadMoreTodoLoading: false }));
-        }
-    };
-
-    //
-    const searchTodo = async (querySearch: string) => {
-        try {
-            setLoading((prev) => ({ ...prev, fetchTodoLoading: true }));
-            const response = await axios.get(`/api/todos/search?querySearch=${querySearch}`);
-            setUniversalArray(response.data || []);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading((prev) => ({ ...prev, fetchTodoLoading: false }));
-        }
-    };
-
-    //
-
-    const addTodo = async (obj: any) => {
-        const { taskName, description, deadline, todoCategory } = obj;
-        try {
-            setLoading((prev) => ({ ...prev, addTodoLoading: true }));
-            const response = await axios.post("/api/todos", {
-                taskName,
-                description,
-                deadline,
-                status: false,
-                todoCategory,
-            });
-
-            setUniversalArray((prevArray) => [...prevArray, response.data]);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading((prev) => ({ ...prev, addTodoLoading: false }));
-        }
-    };
-
-    const updateTodo = async (id: string, obj: any) => {
-        const { taskName, description, status, actions } = obj;
-        try {
-            setLoading((prev) => ({ ...prev, updateTodoLoading: true }));
-            const response = await axios.put(`/api/todos/${id}/333`, {
-                taskName,
-                description,
-                status,
-                actions,
-            });
-
-            setUniversalArray((prevArray) => prevArray.map((todo) => (todo._id == id ? response.data : todo)));
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading((prev) => ({ ...prev, updateTodoLoading: false }));
-        }
-    };
-
-    const updateCompletedTodo = async (id: string) => {
-        try {
-            setLoading((prev) => ({ ...prev, updateTodoLoading: true }));
-            const response = await axios.put(`/api/todos/${id}/333`, {
-                taskName: "",
-                description: "",
-                status: "",
-                actions: "completed",
-            });
-
-            console.log(response.data);
-            setUniversalArray((prevArray) => prevArray.map((todo) => (todo._id == id ? response.data : todo)));
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading((prev) => ({ ...prev, updateTodoLoading: false }));
-        }
-    };
-
-    const deleteTodo = async (id: string) => {
-        try {
-            setLoading((prev) => ({ ...prev, deleteTodoLoading: true }));
-            const response = await axios.delete(`/api/todos/${id}/233`);
-            if (response.status == 200) setUniversalArray((prevArray) => prevArray.filter((todo) => todo._id !== id));
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading((prev) => ({ ...prev, deleteTodoLoading: false }));
-        }
-    };
-
-    /*
-     function 
-     
-
-     */
 
     function fetchMoreTodoHandler(pages: number, itemPerPage: number = 12) {
         setPages((prev) => prev + 1);
@@ -207,13 +81,7 @@ const Page = () => {
     }, [loading.updateTodoLoading]);
 
     const information = { searchTodo, fetchTodo };
-    /*
 
-    */
-
-    useEffect(() => {
-        console.log(category);
-    }, [category]);
     return (
         <contextHomePage.Provider value={information}>
             <main className="pr-3 md:pr-4">

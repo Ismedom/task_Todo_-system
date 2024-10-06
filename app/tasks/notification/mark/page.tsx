@@ -3,12 +3,13 @@
 import VerticalSkelLoading from "@/components/loading/VerticalSkelLoading";
 import NotificationMarkCard from "@/components/notification/NotificationMarkCard";
 import useSocket from "@/hooks/useSocket";
+import { todoInforType } from "@/interface/interface";
 import { contextInfor } from "@/provider/Provider";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 
 const Page = () => {
-    const { notificationArray, setNotificationArray } = useContext<any>(contextInfor);
+    const { notificationArray, setNotificationArray } = useContext(contextInfor);
     const [isLoading, setIsloading] = useState(false);
     const { tasks } = useSocket();
 
@@ -28,15 +29,17 @@ const Page = () => {
     }, []);
 
     useEffect(() => {
-        setNotificationArray((prev: any) => {
-            const newTasks = tasks.filter((task) => !prev.some((existingTask: any) => existingTask._id === task._id));
+        setNotificationArray((prev) => {
+            const newTasks = tasks.filter(
+                (task) => !prev.some((existingTask: todoInforType) => existingTask._id === task._id)
+            );
             return [...prev, ...newTasks];
         });
     }, [tasks]);
 
     if (!(notificationArray.length > 0)) return <div>No, Notification has been read!</div>;
 
-    const item = notificationArray.filter((item: any) => item.status && item.actions === "uncompleted" && !item.check);
+    const item = notificationArray.filter((item) => item.status && item.actions === "uncompleted" && !item.check);
 
     if (!(item.length > 0)) return <div>No, Notification was been found</div>;
 
@@ -46,23 +49,10 @@ const Page = () => {
                 [...Array(6)].map((_, index) => <VerticalSkelLoading key={index} />)
             ) : (
                 <>
-                    {notificationArray.map(
-                        ({
-                            _id,
-                            taskName,
-                            status,
-                            actions,
-                            check,
-                        }: {
-                            _id: string;
-                            taskName: string;
-                            status: boolean;
-                            actions: string;
-                            check: boolean;
-                        }) =>
-                            status && !check && actions === "uncompleted" ? (
-                                <NotificationMarkCard key={_id} _id={_id} title={taskName} status={status} />
-                            ) : null
+                    {notificationArray.map(({ _id, taskName, status, actions, check }) =>
+                        status && !check && actions === "uncompleted" ? (
+                            <NotificationMarkCard key={_id} _id={_id as string} title={taskName} status={status} />
+                        ) : null
                     )}
                 </>
             )}

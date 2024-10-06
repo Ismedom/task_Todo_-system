@@ -1,7 +1,7 @@
 //
 import { contextInfor } from "@/provider/Provider";
 import Link from "next/link";
-import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import CustomSpinner from "../loading/CustomSpinner";
 import { CheckIcon, ClockIcon, XIcon } from "lucide-react";
 import formatDate from "@/functions/formatDate";
@@ -43,7 +43,7 @@ const TodoCart = ({
     updateCompletedTodo,
 }: TodoCartPros) => {
     const [optionVisibility, setOptionVisibility] = useState(false);
-    const { setTodoDetailId, todoDetailId, completedId, setCompletedId } = useContext(contextInfor);
+    const { setTodoDetailId, completedId, setCompletedId } = useContext(contextInfor);
     const [deleteTodoId, setDeleteTodoId] = useState("");
 
     return (

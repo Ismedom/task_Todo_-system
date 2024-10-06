@@ -37,7 +37,7 @@ const SignUp = ({ setIsSignIn }: { setIsSignIn: React.Dispatch<SetStateAction<bo
                 const data = await response.json();
                 setError(data.error || "Sign up failed");
             }
-        } catch (error) {
+        } catch {
             setError("An error occurred. Please try again.");
         } finally {
             setIsLoading(false);

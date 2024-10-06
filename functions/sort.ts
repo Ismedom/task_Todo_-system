@@ -1,25 +1,32 @@
-interface Todo {
+interface todoInforType {
+    _id?: string;
     taskName: string;
-    createdAt: string;
-    deadline: string;
+    description: string;
+    todoCategory: string;
+    status: boolean;
+    check: boolean;
+    actions: string;
+    deadline?: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
-function sortTodoArray(array: Todo[], option: string): Todo[] {
+function sortTodoArray(array: todoInforType[], option: string): todoInforType[] {
     switch (option) {
         case "name":
             return array.sort((a, b) => a.taskName.localeCompare(b.taskName));
 
         case "newest":
-            return array.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+            return array.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
 
         case "latest":
-            return array.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+            return array.sort((a, b) => new Date(a.createdAt || 0).getTime() - new Date(b.createdAt || 0).getTime());
 
         case "deadline-old-to-new":
-            return array.sort((a, b) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime());
+            return array.sort((a, b) => new Date(a.deadline || 0).getTime() - new Date(b.deadline || 0).getTime());
 
         case "deadline-new-to-old":
-            return array.sort((a, b) => new Date(b.deadline).getTime() - new Date(a.deadline).getTime());
+            return array.sort((a, b) => new Date(b.deadline || 0).getTime() - new Date(a.deadline || 0).getTime());
 
         default:
             return array;

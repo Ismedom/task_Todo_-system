@@ -9,13 +9,13 @@ import React, { useContext, useEffect } from "react";
 import { notificationContext } from "../layout";
 
 const NotificationDetails = () => {
-    const { notificationArray } = useContext<any>(contextInfor);
+    const { notificationArray } = useContext(contextInfor);
     const { updateTodoStatus } = useContext(notificationContext);
     const param = useParams();
-    const filterItem = notificationArray.find((item: any) => item._id === param.notificationId);
+    const filterItem = notificationArray.find((item) => item._id === param.notificationId);
 
     useEffect(() => {
-        updateTodoStatus(param.notificationId);
+        updateTodoStatus(param.notificationId as string);
     }, [param.notificationId]);
 
     if (!filterItem) {
@@ -30,7 +30,7 @@ const NotificationDetails = () => {
                 </h3>
                 <p className="text-gray-500 text-[15px]">{filterItem.description}</p>
                 <p className="text-gray-500 text-[15px] py-2">Deadline: {filterItem.deadline}</p>
-                <p className="text-red-400 mb-3 text-[15px] ">Don't see any activity!</p>
+                <p className="text-red-400 mb-3 text-[15px] ">Don&apos;t see any activity!</p>
             </article>
             <div className="border-t border-t-gray-300 pt-3">
                 <Link

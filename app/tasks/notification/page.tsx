@@ -8,7 +8,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 
 const NewNotification = () => {
-    const { notificationArray, setNotificationArray } = useContext<any>(contextInfor);
+    const { notificationArray, setNotificationArray } = useContext(contextInfor);
     const [isLoading, setIsloading] = useState(false);
     const { tasks } = useSocket();
 
@@ -28,14 +28,14 @@ const NewNotification = () => {
     }, []);
 
     useEffect(() => {
-        setNotificationArray((prev: any) => {
-            const newTasks = tasks.filter((task) => !prev.some((existingTask: any) => existingTask._id === task._id));
+        setNotificationArray((prev) => {
+            const newTasks = tasks.filter((task) => !prev.some((existingTask) => existingTask._id === task._id));
             return [...prev, ...newTasks];
         });
     }, [tasks]);
 
     if (!(notificationArray.length > 0)) return <div>No, Notification yet!</div>;
-    const existingNotification = notificationArray.filter((item: any) => item.actions == "uncompleted" && !item.status);
+    const existingNotification = notificationArray.filter((item) => item.actions == "uncompleted" && !item.status);
     if (!(existingNotification.length > 0)) return <div>No notification</div>;
     return (
         <div className="flex flex-col gap-2">
@@ -43,21 +43,10 @@ const NewNotification = () => {
                 [...Array(6)].map((_, index) => <VerticalSkelLoading key={index} />)
             ) : (
                 <>
-                    {notificationArray.map(
-                        ({
-                            _id,
-                            taskName,
-                            status,
-                            actions,
-                        }: {
-                            _id: string;
-                            taskName: string;
-                            status: boolean;
-                            actions: string;
-                        }) =>
-                            !status && actions === "uncompleted" ? (
-                                <NotificationCard key={_id} _id={_id} title={taskName} status={status} />
-                            ) : null
+                    {notificationArray.map(({ _id, taskName, status, actions }) =>
+                        !status && actions === "uncompleted" ? (
+                            <NotificationCard key={_id} _id={_id as string} title={taskName} status={status} />
+                        ) : null
                     )}
                 </>
             )}
