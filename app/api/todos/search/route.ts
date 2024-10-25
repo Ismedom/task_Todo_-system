@@ -1,14 +1,18 @@
 //
 import { NextRequest, NextResponse } from "next/server";
-import dbConnect from "../../lib/connectDb";
 import Todo from "../../model/Todo";
+import dbConnect from "@/lib/connectDb";
+import { auth } from "@/auth";
 
 export async function GET(req: NextRequest) {
     try {
         await dbConnect();
+        const session = await auth();
+        const userId = session?.user?.id;
         const querySearch = req.nextUrl.searchParams.get("querySearch");
         const searchQuery = querySearch
             ? {
+                  userId,
                   $or: [
                       { taskName: { $regex: querySearch, $options: "i" } },
                       { description: { $regex: querySearch, $options: "i" } },

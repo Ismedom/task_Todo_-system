@@ -44,7 +44,7 @@ const Page = () => {
     if (!(item.length > 0)) return <div>No, Notification was been found</div>;
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
             {isLoading ? (
                 [...Array(6)].map((_, index) => <VerticalSkelLoading key={index} />)
             ) : (

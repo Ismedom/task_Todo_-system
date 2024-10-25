@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 
 const NotificationNavData = [
     { id: 1, title: "New", href: "/tasks/notification" },
-    { id: 2, title: "Mark", href: "/tasks/notification/mark" },
+    { id: 2, title: "Achieve", href: "/tasks/notification/achieve" },
 ];
 
 const NotificationNav = () => {
@@ -14,8 +14,8 @@ const NotificationNav = () => {
     const [pathName, setPathName] = useState("/tasks/notification");
 
     useEffect(() => {
-        if (pathname.startsWith("/tasks/notification/mark")) {
-            setPathName("/tasks/notification/mark");
+        if (pathname.startsWith("/tasks/notification/achieve")) {
+            setPathName("/tasks/notification/achieve");
         } else {
             setPathName("/tasks/notification");
         }
@@ -27,8 +27,8 @@ const NotificationNav = () => {
                 {NotificationNavData.map(({ id, title, href }) => (
                     <Link
                         className={`select-none ${
-                            pathName === href ? "bg-green-500 text-gray-200" : "bg-gray-100 hover:bg-gray-200"
-                        } px-3 md:px-4 py-[5px] rounded-sm`}
+                            pathName === href ? "border-b-2 border-b-gray-400" : ""
+                        } px-3 md:px-4 py-[5px] hover:bg-gray-200`}
                         key={id}
                         href={href}
                         id={id.toString()}>

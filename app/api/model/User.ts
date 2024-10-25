@@ -1,4 +1,3 @@
-// models/User.ts
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
@@ -11,6 +10,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a password"],
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
-export default mongoose.models.User || mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema) || mongoose.models.User;
+export default User;

@@ -3,6 +3,15 @@
 import { todoInforType } from "@/interface/interface";
 import { contextInfor } from "@/provider/Provider";
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import CustomSelect from "../ui/Select";
+const categories = [
+    { id: 2, name: "work", stringValue: "Work" },
+    { id: 3, name: "personal", stringValue: "Personal" },
+    { id: 4, name: "shopping", stringValue: "Shopping" },
+    { id: 5, name: "fitness", stringValue: "Fitness" },
+    { id: 6, name: "errands", stringValue: "Errands" },
+];
+
 interface editTodoObjPros {
     taskName: string;
     description: string;
@@ -30,6 +39,7 @@ const EditTodo = ({
     const [editTodoObj, setEditTodoObj] = useState({
         taskName: "",
         description: "",
+        todoCategory: "",
         status: false,
         actions: "created",
     });
@@ -41,6 +51,7 @@ const EditTodo = ({
             setEditTodoObj({
                 taskName: editItem.taskName || "",
                 description: editItem.description || "",
+                todoCategory: "",
                 status: editItem.status || false,
                 actions: editItem.actions || "created",
             });
@@ -50,7 +61,7 @@ const EditTodo = ({
     const handleUpdate = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         updateTodo(updateTodoId, editTodoObj);
-        setEditTodoObj((prev) => ({ ...prev, taskName: "", description: "", status: false }));
+        setEditTodoObj((prev) => ({ ...prev, taskName: "", description: "", status: false, todoCategory: "" }));
         setEditorVisibility(false);
         setCompletedId("");
     };
@@ -112,6 +123,7 @@ const EditTodo = ({
                                 onChange={(e) => setEditTodoObj((prev) => ({ ...prev, description: e.target.value }))}
                             />
                         </div>
+                        {/* <CustomSelect array={categories} StateAction={setCategory} /> */}
                         <div className="flex justify-end px-2 gap-2 pt-3">
                             <div
                                 onClick={() => {

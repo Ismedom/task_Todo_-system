@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import dbConnect from "../../lib/connectDb";
+
 import Todo from "../../model/Todo";
+import dbConnect from "@/lib/connectDb";
+import { auth } from "@/auth";
 
 export async function GET(req: NextRequest) {
     const url = new URL(req.url);
@@ -8,8 +10,10 @@ export async function GET(req: NextRequest) {
     const itemPerPage = parseInt(url.searchParams.get("itemPerPage") || "10");
 
     await dbConnect();
+    const session = await auth();
+    const userId = session?.user?.id;
     try {
-        const todos = await Todo.find({})
+        const todos = await Todo.find({ userId })
             .skip((currentPage - 1) * itemPerPage)
             .limit(itemPerPage);
 

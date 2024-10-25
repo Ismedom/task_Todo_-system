@@ -34,11 +34,14 @@ const NewNotification = () => {
         });
     }, [tasks]);
 
+    if (isLoading) return <div>Loading...</div>;
+
     if (!(notificationArray.length > 0)) return <div>No, Notification yet!</div>;
     const existingNotification = notificationArray.filter((item) => item.actions == "uncompleted" && !item.status);
     if (!(existingNotification.length > 0)) return <div>No notification</div>;
+
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
             {isLoading ? (
                 [...Array(6)].map((_, index) => <VerticalSkelLoading key={index} />)
             ) : (

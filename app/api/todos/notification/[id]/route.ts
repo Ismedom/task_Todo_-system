@@ -1,5 +1,6 @@
-import dbConnect from "@/app/api/lib/connectDb";
 import Todo from "@/app/api/model/Todo";
+import { auth } from "@/auth";
+import dbConnect from "@/lib/connectDb";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
@@ -7,7 +8,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     try {
         await dbConnect();
-        const item = await Todo.findOneAndUpdate({ _id: id }, { status: true }, { new: true });
+        const session = await auth();
+        const userId = session?.user?.id;
+        const item = await Todo.findOneAndUpdate({ _id: id, userId }, { status: true }, { new: true });
         if (!item) return NextResponse.json({ error: "Not found!" }, { status: 404 });
         return NextResponse.json(item, { status: 200 });
     } catch {

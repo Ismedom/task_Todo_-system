@@ -89,7 +89,7 @@ const FormCreateTodo = ({ handleCreateTodo }: handleCreateTodoPros) => {
                                     <div className="flex gap-3">
                                         <input
                                             required
-                                            type="date"
+                                            type="datetime-local"
                                             value={todoInfor.deadline}
                                             min={minDate}
                                             className="px-3 py-1 rounded-lg border border-gray-300 outline-none focus:border-gray-400 cursor-pointer"

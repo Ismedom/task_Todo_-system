@@ -10,17 +10,12 @@ const NotificationMarkCard = ({ _id, title, status }: { _id: string; title: stri
     return (
         <article
             id={_id}
-            className="flex items-center justify-between border border-gray-100 bg-gray-50 hover:bg-gray-100 shadow-sm px-3 md:px-4 md:pr-6 rounded-sm cursor-pointer relative">
-            <Link href={`/tasks/notification/mark/${_id}`} className="py-3 md:py-4 w-full">
-                <div className="flex">
-                    <h3 className="pb-2 text-gray-500 font-bold flex items-center select-none">{title}</h3>
-                    {!status && (
-                        <span>
-                            <Dot className="text-lg text-green-500" />
-                        </span>
-                    )}
-                </div>
-                <p className="text-blue-400 text-sm select-none">Check but tasks doesn&apos;t complete!</p>
+            className="flex items-center justify-between border-b border-b-gray-200 hover:bg-gray-100 px-3 md:px-4 md:pr-6 rounded-sm cursor-pointer relative">
+            <Link
+                href={`/tasks/notification/achieve/${_id}`}
+                className="py-4 md:py-5 w-full grid items-center grid-cols-[150px_1fr] md:grid-cols-[200px_1fr] gap-1 pr-4">
+                <h3 className="text-gray-500 select-none truncate first-letter:uppercase font-normal">{title}</h3>
+                <p className="text-orange-400 text-sm select-none truncate ">Check but tasks doesn&apos;t complete!</p>
             </Link>
             <Trash
                 onClick={() => deleteNotification(_id)}

@@ -32,7 +32,7 @@ const NotificationDetails = () => {
                 </article>
                 <div className="border-t border-t-gray-300 pt-3">
                     <Link
-                        href="/tasks/notification/mark"
+                        href="/tasks/notification/achieve"
                         className="bg-red-500 py-1 px-4 md:px-5 text-gray-200 rounded-2xl flex gap-2 items-center w-max select-none">
                         <FontAwesomeIcon icon={faArrowLeft} />
                         Back

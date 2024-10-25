@@ -27,7 +27,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         <notificationContext.Provider value={notificationContextInfor}>
             <NotificationProvider>
                 <div className="md:px-2 pr-4 md:pr-6 lg:pr-8">
-                    <div className="sticky top-0 z-[991] pt-3 pb-2 md:pb-4 mb-3 border-b border-b-gray-300">
+                    <div className="sticky top-0 z-[991] border-b my-3 md:my-4 border-b-gray-300">
                         <NotificationNav />
                     </div>
                     {children}

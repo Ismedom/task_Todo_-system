@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { BellIcon, InfoIcon, LayoutDashboard } from "lucide-react";
 import Profile from "../ui/Profile";
+import { signOut } from "next-auth/react";
 
 const NavigationBar = () => {
     const pathname = usePathname();
@@ -56,7 +57,9 @@ const NavigationBar = () => {
                 ))}
             </nav>
             <div className="absolute bottom-5 w-full flex justify-center">
-                <button className="bg-red-800 hover:bg-red-700 text-gray-200 px-3 md:px-4 py-1 w-[80%] text-center rounded-md">
+                <button
+                    onClick={() => signOut()}
+                    className="bg-red-800 hover:bg-red-700 text-gray-200 px-3 md:px-4 py-1 w-[80%] text-center rounded-md">
                     Sign out
                 </button>
             </div>

@@ -13,17 +13,21 @@ const NotificationCard = ({ _id, title, status }: { _id: string; title: string; 
             <div className="relative">
                 <article
                     id={_id}
-                    className="flex items-center justify-between border bg-gray-50 border-gray-100 hover:bg-gray-100 shadow-sm px-3 md:px-4 md:pr-6 rounded-sm cursor-pointer relative">
-                    <Link href={`/tasks/notification/${_id}`} className="py-3 md:py-4 w-full">
+                    className="flex items-center justify-between hover:bg-gray-100 border-b border-b-gray-100 shadow-sm px-3 md:px-4 md:pr-6 rounded-sm cursor-pointer relative">
+                    <Link
+                        href={`/tasks/notification/${_id}`}
+                        className="py-4 md:py-5 w-full grid grid-cols-[150px_1fr] md:grid-cols-[200px_1fr] items-center">
                         <div className="flex">
-                            <h3 className="pb-2 text-gray-500 font-bold flex items-center select-none">{title}</h3>
+                            <h3 className=" text-gray-500 font-normal select-none truncate first-letter:uppercase">
+                                {title}
+                            </h3>
                             {!status && (
                                 <span>
                                     <Dot className="text-lg text-green-500" />
                                 </span>
                             )}
                         </div>
-                        <p className={`${!status ? "text-red-400" : "text-blue-500"} text-sm select-none`}>
+                        <p className={`${!status ? "text-red-400" : "text-blue-500"} text-sm select-none truncate`}>
                             {!status ? "Your task doesn't complete!" : "Check"}
                         </p>
                     </Link>

@@ -15,7 +15,7 @@ function CustomCheckBox() {
             onClick={() => setEnabled(!enabled)}
             className="select-none flex items-center py-1 gap-1 border border-gray-200 hover:bg-gray-50 rounded-md px-3 cursor-pointer">
             <label htmlFor="onlineSearch" className="cursor-pointer text-gray-500">
-                Search online
+                Full Search
             </label>
             <Checkbox
                 id="onlineSearch"

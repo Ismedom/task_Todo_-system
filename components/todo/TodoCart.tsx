@@ -105,7 +105,7 @@ const TodoCart = ({
                     ) : null}
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-600">{taskName}</h3>
+                <h3 className="text-lg font-bold text-gray-600 first-letter:uppercase">{taskName}</h3>
                 <p className="text-[14px] text-gray-500 line-clamp-3">{description}</p>
                 <p
                     className={`text-[14px] flex gap-1 items-center ${
