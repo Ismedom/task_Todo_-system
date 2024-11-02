@@ -41,7 +41,7 @@ const authOptions = {
                             email: credentials.email,
                         };
                     }
-                    // console.log(user);
+                    console.log(user);
                     const isValid = await compare(credentials.password as string, user.password);
 
                     if (!isValid) {
@@ -66,17 +66,14 @@ const authOptions = {
     session: {
         strategy: "jwt",
     },
-    jwt: {
     secret: process.env.NEXTAUTH_SECRET,
-    encryption: true, 
-},
     callbacks: {
         async jwt({ token, user }: { token: JWT; user?: User }) {
             if (user) {
                 token.id = user.id;
                 token.email = user.email;
             }
-            console.log(token);
+            console.log("token initil : " + token);
             return token;
         },
         async session({ session, token }: { session: Session; token: JWT }) {
@@ -84,11 +81,11 @@ const authOptions = {
                 session.user.id = token.id as string;
                 session.user.email = token.email as string;
             }
-            console.log(session);
+            console.log("token initil : " + token);
             return session;
         },
     },
-    debug: process.env.NODE_ENV === "development",
+    // debug: process.env.NODE_ENV === "development",
 } satisfies NextAuthConfig;
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);
