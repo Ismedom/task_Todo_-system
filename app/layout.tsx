@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { NextUIProvider } from "@nextui-org/react";
 import Provider from "@/provider/Provider";
+import SessionWrapper from "@/provider/SessionWrapper";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -18,19 +18,24 @@ const geistMono = localFont({
 export const metadata: Metadata = {
     title: "Online todo list",
     description: "online todo, task",
+    icons: {
+        icon: "/favicon.webp",
+    },
 };
 
 export default function RootLayout({
     children,
+    session,
 }: Readonly<{
     children: React.ReactNode;
+    session: any;
 }>) {
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <NextUIProvider>
+                <SessionWrapper session={session}>
                     <Provider>{children}</Provider>
-                </NextUIProvider>
+                </SessionWrapper>
             </body>
         </html>
     );

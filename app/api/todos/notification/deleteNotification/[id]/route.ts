@@ -1,5 +1,5 @@
+import { auth } from "@/app/api/auth/[...nextauth]/option";
 import Todo from "@/app/api/model/Todo";
-import { auth } from "@/auth";
 import dbConnect from "@/lib/connectDb";
 import { NextRequest, NextResponse } from "next/server";
 

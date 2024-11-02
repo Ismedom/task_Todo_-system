@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/connectDb";
 import Todo from "../../../model/Todo";
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/auth";
+import { auth } from "../../../auth/[...nextauth]/option";
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string; userId: string } }) {
     const { id } = params;

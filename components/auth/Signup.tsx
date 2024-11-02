@@ -2,6 +2,7 @@
 
 import React, { SetStateAction, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Input } from "@headlessui/react";
 
 const SignUp = ({ setIsSignIn }: { setIsSignIn: React.Dispatch<SetStateAction<boolean>> }) => {
     const [email, setEmail] = useState("");
@@ -54,7 +55,7 @@ const SignUp = ({ setIsSignIn }: { setIsSignIn: React.Dispatch<SetStateAction<bo
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                             Email
                         </label>
-                        <input
+                        <Input
                             type="email"
                             id="email"
                             value={email}
@@ -69,7 +70,7 @@ const SignUp = ({ setIsSignIn }: { setIsSignIn: React.Dispatch<SetStateAction<bo
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                             Password
                         </label>
-                        <input
+                        <Input
                             type="password"
                             id="password"
                             value={password}
@@ -84,7 +85,7 @@ const SignUp = ({ setIsSignIn }: { setIsSignIn: React.Dispatch<SetStateAction<bo
                         <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                             Confirm Password
                         </label>
-                        <input
+                        <Input
                             type="password"
                             id="confirmPassword"
                             placeholder="confirm Password"

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Todo from "../../model/Todo";
 import dbConnect from "@/lib/connectDb";
-import { auth } from "@/auth";
+import { auth } from "../../auth/[...nextauth]/option";
 
 export async function GET() {
     try {

@@ -1,7 +1,6 @@
 import mongoose, { Mongoose, ConnectOptions } from "mongoose";
 
-// const MONGODB_URI = process.env.MONGODBURL as string;
-const MONGODB_URI = process.env.MONGODBURL as string;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 interface CachedConnection {
     conn: Mongoose | null;

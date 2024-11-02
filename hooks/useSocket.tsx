@@ -1,28 +1,35 @@
 "use client";
+import { useSession } from "next-auth/react";
 import { useEffect, useState, useRef } from "react";
 import { io, Socket } from "socket.io-client";
-
-// interface Todo {
-//     _id: string;
-//     title: string;
-//     completed: boolean;
-// }
 
 export default function UseSocket() {
     const [tasks, setTasks] = useState<any[]>([]);
     const socketRef = useRef<Socket | null>(null);
-
+    const { data: session } = useSession();
     useEffect(() => {
-        socketRef.current = io("http://localhost:4000");
-
-        socketRef.current.on("todos", (receivedTodos: any) => {
-            setTasks(receivedTodos);
-        });
-
-        return () => {
+        if (session?.user) {
             socketRef.current?.disconnect();
-        };
-    }, []);
+
+            socketRef.current = io("http://localhost:4000", {
+                auth: {
+                    userId: session.user.id,
+                },
+            });
+
+            socketRef.current.on("fetch_all_tasks", (receivedTodos: any[]) => {
+                setTasks(receivedTodos);
+            });
+
+            socketRef.current.on("connect_error", (error) => {
+                console.error("Socket connection error:", error);
+            });
+
+            return () => {
+                socketRef.current?.disconnect();
+            };
+        }
+    }, [session]);
 
     return { tasks };
 }

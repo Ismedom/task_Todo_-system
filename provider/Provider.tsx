@@ -23,7 +23,7 @@ export const initialTodoValue: todoInforType = {
     updatedAt: "",
 };
 
-const initialValue: ContextProps = {
+export const initialValue: ContextProps = {
     universalArray: [],
     setUniversalArray: () => [],
     todoInfor: initialTodoValue,

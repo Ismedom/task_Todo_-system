@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import React, { SetStateAction, useState } from "react";
 
@@ -49,7 +50,7 @@ const SignIn = ({ setIsSignIn }: { setIsSignIn: React.Dispatch<SetStateAction<bo
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                             Email
                         </label>
-                        <input
+                        <Input
                             id="email"
                             type="email"
                             value={email}
@@ -64,7 +65,7 @@ const SignIn = ({ setIsSignIn }: { setIsSignIn: React.Dispatch<SetStateAction<bo
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                             Password
                         </label>
-                        <input
+                        <Input
                             id="password"
                             type="password"
                             placeholder="password"
