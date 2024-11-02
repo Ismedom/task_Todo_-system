@@ -10,20 +10,9 @@ export async function middleware(req: NextRequest) {
     try {
         const pathname = req.nextUrl.pathname;
 
-        const token = await getToken({
-            req,
-            secret: process.env.NEXTAUTH_SECRET,
-        });
-        console.log("NEXTAUTH_SECRET: " + process.env.NEXTAUTH_SECRET);
-
-    console.log("All Cookies:", req.cookies);
-console.log("Token:", await getToken({ req, secret: process.env.NEXTAUTH_SECRET }));
-        
-        console.log("token : " + token);
-
-        if (pathname === "/" && token?.email) {
-            return NextResponse.redirect(new URL("/tasks", req.url));
-        }
+        // if (pathname === "/" && token?.email) {
+        //     return NextResponse.redirect(new URL("/tasks", req.url));
+        // }
         const protectedPaths = ["/dashboard", "/profile", "/settings", "/tasks"];
 
         const isProtectedPath = protectedPaths.some((path) => pathname.startsWith(path));
@@ -31,6 +20,11 @@ console.log("Token:", await getToken({ req, secret: process.env.NEXTAUTH_SECRET 
         if (!isProtectedPath) {
             return NextResponse.next();
         }
+
+        const token = await getToken({
+            req,
+            secret: process.env.NEXTAUTH_SECRET,
+        });
 
         if (token) {
             return NextResponse.next();
