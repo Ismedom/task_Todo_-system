@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Provider from "@/provider/Provider";
 import SessionWrapper from "@/provider/SessionWrapper";
+import { Suspense } from "react";
+import SkeletonLoader from "@/components/loading/SkelLoading";
 // import icon from "../"
 
 const geistSans = localFont({
@@ -33,7 +35,9 @@ export default function RootLayout({
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <SessionWrapper>
-                    <Provider>{children}</Provider>
+                    <Suspense fallback={<SkeletonLoader skelCount={8} />}>
+                        <Provider>{children}</Provider>
+                    </Suspense>
                 </SessionWrapper>
             </body>
         </html>
