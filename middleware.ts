@@ -9,9 +9,6 @@ export const config = {
 export async function middleware(req: NextRequest) {
     try {
         const pathname = req.nextUrl.pathname;
-        // console.log("Environment:", process.env.NODE_ENV);
-        // console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
-        // console.log("Request URL:", req.url);
 
         const token = await getToken({
             req,
@@ -39,9 +36,10 @@ export async function middleware(req: NextRequest) {
         // signInUrl.searchParams.set("callbackUrl", pathname);
 
         return NextResponse.redirect(signInUrl);
-    } catch (error) {
-        const errorUrl = new URL("/error", req.url);
-        // console.log(error);
-        return NextResponse.redirect(errorUrl);
+    } catch {
+        // const errorUrl = new URL("/error", req.url);
+
+        return;
+        // .redirect(errorUrl);
     }
 }

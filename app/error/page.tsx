@@ -12,7 +12,7 @@ const errorMessages: Record<string, string> = {
 
 export default function ErrorPage() {
     const searchParams = useSearchParams();
-    const error = searchParams.get("error"); // Get the error from the query params
+    const error = searchParams.get("error");
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {

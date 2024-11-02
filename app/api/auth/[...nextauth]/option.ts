@@ -60,7 +60,7 @@ const authOptions = {
         }),
     ],
     pages: {
-        signIn: "/",
+        signIn: "auth/signIn",
         error: "/auth/error",
     },
     session: {
