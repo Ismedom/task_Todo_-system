@@ -12,6 +12,10 @@ export default function UseSocket() {
             socketRef.current?.disconnect();
 
             socketRef.current = io(process.env.BACK_END_URL, {
+                     transports: ['websocket', 'polling'],
+                    reconnectionAttempts: 5,
+                    reconnectionDelay: 1000,
+                    autoConnect: true,
                 auth: {
                     userId: session.user.id,
                 },
