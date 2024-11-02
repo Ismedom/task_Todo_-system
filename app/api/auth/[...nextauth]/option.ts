@@ -41,7 +41,7 @@ const authOptions = {
                             email: credentials.email,
                         };
                     }
-                    console.log(user);
+                    // console.log(user);
                     const isValid = await compare(credentials.password as string, user.password);
 
                     if (!isValid) {
@@ -72,7 +72,7 @@ const authOptions = {
                 token.id = user.id;
                 token.email = user.email;
             }
-            console.log("token initil : " + token);
+            console.log(token);
             return token;
         },
         async session({ session, token }: { session: Session; token: JWT }) {
@@ -80,7 +80,7 @@ const authOptions = {
                 session.user.id = token.id as string;
                 session.user.email = token.email as string;
             }
-            console.log("session initil : " + session);
+            console.log(session);
             return session;
         },
     },
