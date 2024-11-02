@@ -15,6 +15,8 @@ export async function middleware(req: NextRequest) {
             secret: process.env.NEXTAUTH_SECRET,
         });
 
+        console.log(token);
+
         if (pathname === "/" && token?.email) {
             // console.log(token);
             return NextResponse.redirect(new URL("/tasks", req.url));

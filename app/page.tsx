@@ -32,7 +32,7 @@ export default function SignInPage() {
                 return;
             }
             setUniversalArray([]);
-            router.push(callbackUrl);
+            router.push("/tasks");
         } catch {
             setError("An error occurred during sign in");
         }
