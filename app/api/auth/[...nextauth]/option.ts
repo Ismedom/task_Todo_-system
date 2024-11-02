@@ -41,11 +41,11 @@ const authOptions = {
                             email: credentials.email,
                         };
                     }
-
+                    console.log(user);
                     const isValid = await compare(credentials.password as string, user.password);
 
                     if (!isValid) {
-                        throw new Error("Invalid credentials");
+                        throw new Error("Incrrect password");
                     }
 
                     return {
@@ -60,7 +60,7 @@ const authOptions = {
         }),
     ],
     pages: {
-        signIn: "/auth/signin",
+        signIn: "/",
         error: "/auth/error",
     },
     session: {

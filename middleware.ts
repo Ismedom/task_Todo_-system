@@ -18,7 +18,6 @@ export async function middleware(req: NextRequest) {
         console.log(token);
 
         if (pathname === "/" && token?.email) {
-            // console.log(token);
             return NextResponse.redirect(new URL("/tasks", req.url));
         }
         const protectedPaths = ["/dashboard", "/profile", "/settings", "/tasks"];
