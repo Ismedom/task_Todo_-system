@@ -11,7 +11,7 @@ export default function UseSocket() {
         if (session?.user) {
             socketRef.current?.disconnect();
 
-            socketRef.current = io("tasktifyapp-production.up.railway.app", {
+            socketRef.current = io(process.env.BACK_END_URL, {
                 transports: ["websocket", "polling"],
                 reconnectionAttempts: 5,
                 autoConnect: true,
