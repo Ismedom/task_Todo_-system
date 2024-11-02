@@ -14,6 +14,7 @@ export async function middleware(req: NextRequest) {
             req,
             secret: process.env.NEXTAUTH_SECRET,
         });
+        console.log("NEXTAUTH_SECRET: " + process.env.NEXTAUTH_SECRET);
 
         console.log(token);
 
