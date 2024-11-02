@@ -41,7 +41,7 @@ const authOptions = {
                             email: credentials.email,
                         };
                     }
-                    console.log(user);
+                    // console.log(user);
                     const isValid = await compare(credentials.password as string, user.password);
 
                     if (!isValid) {
