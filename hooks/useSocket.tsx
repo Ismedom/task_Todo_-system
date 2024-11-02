@@ -11,7 +11,7 @@ export default function UseSocket() {
         if (session?.user) {
             socketRef.current?.disconnect();
 
-            socketRef.current = io("http://localhost:4000", {
+            socketRef.current = io(process.env.BACK_END_URL, {
                 auth: {
                     userId: session.user.id,
                 },
