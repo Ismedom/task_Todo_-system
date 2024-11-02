@@ -50,7 +50,7 @@ const TodoList = ({
                     updateCompletedTodo={updateCompletedTodo}
                 />
             ))}
-            {displayArray.length == 0 ? <div>No Item were found!</div> : null}
+            {displayArray.length == 0 ? <div>No tasks were found!</div> : null}
         </div>
     );
 };

@@ -1,25 +1,39 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { BellIcon, InfoIcon, LayoutDashboard } from "lucide-react";
+import { BellIcon, GridIcon, InfoIcon, LayoutDashboard } from "lucide-react";
 import Profile from "../ui/Profile";
-import { signOut } from "next-auth/react";
+import SignOutButton from "./SignoutButton";
+import UseSocket from "@/hooks/useSocket";
 
 const NavigationBar = () => {
     const pathname = usePathname();
+    const { tasks } = UseSocket();
+
+    // useEffect(() => {
+    //     console.log(tasks);
+    // }, [tasks]);
 
     const navbarData = [
         {
             id: 1,
-            text: "Dashboard",
+            text: "Tasks",
             value: "",
             href: pathname.startsWith("/tasks/details") ? `/tasks/details/${pathname.split("/")[3]}` : `/tasks`,
             icon: <LayoutDashboard className="size-4 translate-y-[1px]" aria-hidden="true" />,
         },
+
         {
             id: 2,
+            text: "Dashboard",
+            value: "dashboard",
+            href: "/tasks/dashboard",
+            icon: <GridIcon className="size-4 translate-y-[1px]" aria-hidden="true" />,
+        },
+        {
+            id: 3,
             text: "Notification",
             value: "notification",
             href: pathname.startsWith("/tasks/notification/mark")
@@ -28,7 +42,7 @@ const NavigationBar = () => {
             icon: <BellIcon className="size-4 translate-y-[1px]" aria-hidden="true" />,
         },
         {
-            id: 3,
+            id: 4,
             text: "About",
             value: "about",
             href: "/tasks/about",
@@ -42,26 +56,27 @@ const NavigationBar = () => {
                 <Profile />
             </div>
             <nav className="flex flex-col pt-5 md:pt-6 lg:pt-7 pl-2">
-                {navbarData.map(({ id, href, text, icon }) => (
+                {navbarData.map(({ id, href, text, icon }, index) => (
                     <Link
                         key={id}
                         href={href}
-                        className={`flex gap-2 items-center px-3 py-3 border-b border-b-gray-200 select-none md:py-4 rounded-l-md  ${
+                        className={`flex gap-2 items-center px-3 py-3 border-b border-b-gray-200 select-none md:py-4 rounded-l-md relative  ${
                             pathname === href
-                                ? "text-gray-100 border bg-blue-500 font-bold"
+                                ? "text-gray-100 border bg-blue-500"
                                 : "text-gray-500 hover:bg-gray-200 hover:text-gray-500"
                         }`}>
                         <div className="translate-y-[-1px]">{icon}</div>
                         <span>{text}</span>
+                        {index === 2 && tasks.length !== 0 ? (
+                            <span className="w-5 h-5 px-2 flex justify-center items-center rounded-full bg-red-500 text-gray-200">
+                                {tasks.length}
+                            </span>
+                        ) : null}
                     </Link>
                 ))}
             </nav>
             <div className="absolute bottom-5 w-full flex justify-center">
-                <button
-                    onClick={() => signOut()}
-                    className="bg-red-800 hover:bg-red-700 text-gray-200 px-3 md:px-4 py-1 w-[80%] text-center rounded-md">
-                    Sign out
-                </button>
+                <SignOutButton />
             </div>
         </div>
     );

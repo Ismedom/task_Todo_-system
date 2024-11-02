@@ -10,7 +10,7 @@ const page: React.FC = () => {
         "Mark tasks as completed",
         "Filter tasks by date created, category, status",
         "Responsive design for both mobile and desktop",
-        "Real-time updates with task expiration dates",
+        "Real-time updates with task expiration dates every 30 minutes",
         "User authentication for personalized access",
     ];
     const techStack = [
