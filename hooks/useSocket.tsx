@@ -12,7 +12,7 @@ export default function UseSocket() {
             socketRef.current?.disconnect();
 
             socketRef.current = io(process.env.NEXT_PUBLIC_BACK_END_URL, {
-                // transports: ["websocket", "polling"],
+                transports: ["websocket", "polling"],
                 // reconnectionAttempts: 5,
                 // withCredentials: true,
                 auth: {
