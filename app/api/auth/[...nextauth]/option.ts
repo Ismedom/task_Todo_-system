@@ -41,7 +41,7 @@ const authOptions = {
                             email: credentials.email,
                         };
                     }
-                    // console.log(user);
+                    console.log(user);
                     const isValid = await compare(credentials.password as string, user.password);
 
                     if (!isValid) {
@@ -66,39 +66,25 @@ const authOptions = {
     session: {
         strategy: "jwt",
     },
-   callbacks: {
-    async jwt({ token, user, account, profile }) {
-        console.log("JWT Callback - Input:", { token, user, account, profile });
-        
-        if (user) {
-            // កត់ត្រាពេលមាន user ថ្មី
-            console.log("New user logged in:", user);
-            token.id = user.id;
-            token.email = user.email;
-        }
-        
-        // Log the final token state
-        console.log("JWT Callback - Output Token:", token);
-        return token;
+    callbacks: {
+        async jwt({ token, user }: { token: JWT; user?: User }) {
+            if (user) {
+                token.id = user.id;
+                token.email = user.email;
+            }
+            console.log("token initil : " + token);
+            return token;
+        },
+        async session({ session, token }: { session: Session; token: JWT }) {
+            if (token && session.user) {
+                session.user.id = token.id as string;
+                session.user.email = token.email as string;
+            }
+            console.log("session initil : " + session);
+            return session;
+        },
     },
-    
-    async session({ session, token, user }) {
-        console.log("Session Callback - Input:", { session, token, user });
-        
-        if (session.user) {
-            session.user.id = token.id as string;
-            session.user.email = token.email as string;
-            
-            // អាចបន្ថែម custom data ផ្សេងទៀត
-            session.user.role = token.role as string;
-        }
-        
-        // Log the final session state
-        console.log("Session Callback - Output Session:", session);
-        return session;
-    },
-},
-    // debug: process.env.NODE_ENV === "development",
+    debug: process.env.NODE_ENV === "development",
 } satisfies NextAuthConfig;
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);
