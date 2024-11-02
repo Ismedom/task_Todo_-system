@@ -9,10 +9,18 @@ export const config = {
 export async function middleware(req: NextRequest) {
     try {
         const pathname = req.nextUrl.pathname;
+        console.log("Environment:", process.env.NODE_ENV);
+        console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
+        console.log("Request URL:", req.url);
 
-        // if (pathname === "/" && token?.email) {
-        //     return NextResponse.redirect(new URL("/tasks", req.url));
-        // }
+        const token = await getToken({
+            req,
+            secret: process.env.NEXTAUTH_SECRET,
+        });
+
+        if (pathname === "/" && token?.email) {
+            return NextResponse.redirect(new URL("/tasks", req.url));
+        }
         const protectedPaths = ["/dashboard", "/profile", "/settings", "/tasks"];
 
         const isProtectedPath = protectedPaths.some((path) => pathname.startsWith(path));
@@ -20,11 +28,6 @@ export async function middleware(req: NextRequest) {
         if (!isProtectedPath) {
             return NextResponse.next();
         }
-
-        const token = await getToken({
-            req,
-            secret: process.env.NEXTAUTH_SECRET,
-        });
 
         if (token) {
             return NextResponse.next();
