@@ -15,6 +15,7 @@ export default function UseSocket() {
                 transports: ["websocket", "polling"],
                 reconnectionAttempts: 5,
                 autoConnect: true,
+                withCredentials: true,
                 auth: {
                     userId: session.user.id,
                 },
