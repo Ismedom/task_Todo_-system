@@ -3,14 +3,14 @@
 import { todoInforType } from "@/interface/interface";
 import { contextInfor } from "@/provider/Provider";
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
-import CustomSelect from "../ui/Select";
-const categories = [
-    { id: 2, name: "work", stringValue: "Work" },
-    { id: 3, name: "personal", stringValue: "Personal" },
-    { id: 4, name: "shopping", stringValue: "Shopping" },
-    { id: 5, name: "fitness", stringValue: "Fitness" },
-    { id: 6, name: "errands", stringValue: "Errands" },
-];
+// import CustomSelect from "../ui/Select";
+// const categories = [
+//     { id: 2, name: "work", stringValue: "Work" },
+//     { id: 3, name: "personal", stringValue: "Personal" },
+//     { id: 4, name: "shopping", stringValue: "Shopping" },
+//     { id: 5, name: "fitness", stringValue: "Fitness" },
+//     { id: 6, name: "errands", stringValue: "Errands" },
+// ];
 
 interface editTodoObjPros {
     taskName: string;

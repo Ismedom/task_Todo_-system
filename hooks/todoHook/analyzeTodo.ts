@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AnalyzeTodo = () => {
     const [dataAnalysis, setDataAnalysis] = useState<any>([]);
@@ -18,7 +18,11 @@ const AnalyzeTodo = () => {
         }
     };
 
-    return { handleFetchTaskAnalysis, dataAnalysis, error, fetchDataLoading };
+    useEffect(() => {
+        handleFetchTaskAnalysis();
+    }, []);
+
+    return { dataAnalysis, error, fetchDataLoading };
 };
 
 export default AnalyzeTodo;

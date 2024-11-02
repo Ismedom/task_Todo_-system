@@ -23,7 +23,7 @@ export interface todoInforType {
 
 export interface ContextProps {
     universalArray: todoInforType[];
-    setUniversalArray: Dispatch<SetStateAction<any[]>>;
+    setUniversalArray: Dispatch<SetStateAction<todoInforType[]>>;
     todoInfor: todoInforType;
     setTodoInfor: Dispatch<SetStateAction<todoInforType>>;
     createTodoAction: { display: boolean };

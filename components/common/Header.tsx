@@ -6,11 +6,11 @@ import { contextInfor } from "@/provider/Provider";
 import { ArrowLeft, Plus } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { contextHomePage } from "@/app/tasks/page";
+import { HomePageContext } from "@/context/HomePageContext";
 
 const Header = () => {
     const { setCreateTodoAction, searchValue, setSearchValue, onlineSearch } = useContext(contextInfor);
-    const { searchTodo, fetchTodo } = useContext(contextHomePage);
+    const { searchTodo, fetchTodo } = useContext(HomePageContext);
 
     const handleCreate = () => {
         setCreateTodoAction((prev) => ({ ...prev, display: true }));

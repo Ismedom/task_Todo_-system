@@ -1,11 +1,11 @@
 "use client";
 
 import { notificationContext } from "@/app/tasks/notification/layout";
-import { Dot, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import Link from "next/link";
 import React, { useContext } from "react";
 
-const NotificationMarkCard = ({ _id, title, status }: { _id: string; title: string; status: boolean }) => {
+const NotificationMarkCard = ({ _id, title }: { _id: string; title: string; status: boolean }) => {
     const { deleteNotification } = useContext(notificationContext);
     return (
         <article

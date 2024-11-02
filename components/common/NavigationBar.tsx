@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { BellIcon, GridIcon, InfoIcon, LayoutDashboard } from "lucide-react";

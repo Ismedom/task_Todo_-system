@@ -1,6 +1,6 @@
 "use client";
 
-import { contextInfor, initialTodoValue } from "@/provider/Provider";
+import { contextInfor } from "@/provider/Provider";
 import { Button, Input } from "@headlessui/react";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ export default function SignInPage() {
             }
             setUniversalArray([]);
             router.push(callbackUrl);
-        } catch (error) {
+        } catch {
             setError("An error occurred during sign in");
         }
     };

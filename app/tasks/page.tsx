@@ -7,7 +7,7 @@ import filterArray from "@/functions/filter";
 import search from "@/functions/search";
 import sortTodoArray from "@/functions/sort";
 import { contextInfor } from "@/provider/Provider";
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import SkeletonLoader from "@/components/loading/SkelLoading";
 import SubNavBar from "@/components/common/SubNavBar";
 import Header from "@/components/common/Header";
@@ -19,14 +19,7 @@ import UseAddTodo from "@/hooks/todoHook/useAddTodo";
 import UseUpdateTodo from "@/hooks/todoHook/useUpdateTodo";
 import UseUpdateCompeteTodo from "@/hooks/todoHook/useUpdateCompeteTodo";
 import UseDeleteTodo from "@/hooks/todoHook/useDeleteTodo";
-import { contextHomePageType } from "@/interface/interface";
-
-const initialValue: contextHomePageType = {
-    searchTodo: async () => {},
-    fetchTodo: async () => {},
-};
-
-export const contextHomePage = createContext(initialValue);
+import { HomePageContext } from "../../context/HomePageContext";
 
 const Page = () => {
     const { todoInfor, setTodoInfor, universalArray, sort, searchValue, category, todoFilters, loading, onlineSearch } =
@@ -83,7 +76,7 @@ const Page = () => {
     const information = { searchTodo, fetchTodo };
 
     return (
-        <contextHomePage.Provider value={information}>
+        <HomePageContext.Provider value={information}>
             <main className="pr-3 md:pr-4">
                 <div className="sticky top-0 bg-white z-[900]">
                     <Header />
@@ -122,7 +115,7 @@ const Page = () => {
                     </div>
                 ) : null}
             </main>
-        </contextHomePage.Provider>
+        </HomePageContext.Provider>
     );
 };
 

@@ -26,7 +26,7 @@ export const initialTodoValue: todoInforType = {
 export const initialValue: ContextProps = {
     universalArray: [],
     setUniversalArray: () => [],
-    todoInfor: initialTodoValue,
+    todoInfor: initialTodoValue || [],
     setTodoInfor: () => {},
     createTodoAction: { display: false },
     setCreateTodoAction: () => {},

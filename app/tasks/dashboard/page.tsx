@@ -1,16 +1,21 @@
 "use client";
 
+type StatusType = "success" | "danger" | "warning" | "none";
+type DataAnalysisItem = {
+    title: string;
+    status: StatusType;
+    value: number;
+    type: "number" | "percentage";
+};
+
 import AnalyzeCard from "@/components/card/AnalyzeCard";
 import AnalyzeTodo from "@/hooks/todoHook/analyzeTodo";
-import React, { useEffect } from "react";
+import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const page = () => {
-    const { handleFetchTaskAnalysis, dataAnalysis, error, fetchDataLoading } = AnalyzeTodo();
-    useEffect(() => {
-        handleFetchTaskAnalysis();
-    }, []);
+    const { dataAnalysis, error, fetchDataLoading } = AnalyzeTodo();
 
     if (fetchDataLoading)
         return (
@@ -56,7 +61,7 @@ const page = () => {
         <div className="pr-4">
             <h3 className="my-4 pb-2 text-lg text-gray-500 border-b border-b-gray-400">Analyze Your Actions</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {dataAnalysis?.slice(0, 4).map((item: any, index: number) => (
+                {dataAnalysis?.slice(0, 4).map((item: DataAnalysisItem, index: number) => (
                     <AnalyzeCard
                         key={index}
                         title={item.title}
@@ -68,7 +73,7 @@ const page = () => {
                 ))}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                {dataAnalysis?.slice(4, dataAnalysis.length).map((item: any, index: number) => (
+                {dataAnalysis?.slice(4, dataAnalysis.length).map((item: DataAnalysisItem, index: number) => (
                     <AnalyzeCard
                         key={index}
                         title={item.title}
