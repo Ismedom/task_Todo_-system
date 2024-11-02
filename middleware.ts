@@ -16,6 +16,9 @@ export async function middleware(req: NextRequest) {
         });
         console.log("NEXTAUTH_SECRET: " + process.env.NEXTAUTH_SECRET);
 
+    console.log("All Cookies:", req.cookies);
+console.log("Token:", await getToken({ req, secret: process.env.NEXTAUTH_SECRET }));
+        
         console.log("token : " + token);
 
         if (pathname === "/" && token?.email) {
