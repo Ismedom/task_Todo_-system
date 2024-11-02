@@ -13,8 +13,6 @@ export default function UseSocket() {
 
             socketRef.current = io(process.env.NEXT_PUBLIC_BACK_END_URL, {
                 transports: ["websocket", "polling"],
-                // reconnectionAttempts: 5,
-                // withCredentials: true,
                 auth: {
                     userId: session.user.id,
                 },
