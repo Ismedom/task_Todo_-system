@@ -66,6 +66,10 @@ const authOptions = {
     session: {
         strategy: "jwt",
     },
+    jwt: {
+    secret: process.env.NEXTAUTH_SECRET,
+    encryption: true, 
+},
     callbacks: {
         async jwt({ token, user }: { token: JWT; user?: User }) {
             if (user) {
