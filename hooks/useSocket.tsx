@@ -11,11 +11,10 @@ export default function UseSocket() {
         if (session?.user) {
             socketRef.current?.disconnect();
 
-            socketRef.current = io(process.env.BACK_END_URL, {
-                transports: ["websocket", "polling"],
-                reconnectionAttempts: 5,
-                autoConnect: true,
-                withCredentials: true,
+            socketRef.current = io(process.env.NEXT_PUBLIC_BACK_END_URL, {
+                // transports: ["websocket", "polling"],
+                // reconnectionAttempts: 5,
+                // withCredentials: true,
                 auth: {
                     userId: session.user.id,
                 },
