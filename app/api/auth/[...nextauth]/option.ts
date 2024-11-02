@@ -72,6 +72,7 @@ const authOptions = {
                 token.id = user.id;
                 token.email = user.email;
             }
+            console.log("token initil : " + token);
             return token;
         },
         async session({ session, token }: { session: Session; token: JWT }) {
@@ -79,6 +80,7 @@ const authOptions = {
                 session.user.id = token.id as string;
                 session.user.email = token.email as string;
             }
+            console.log("session initil : " + session);
             return session;
         },
     },
