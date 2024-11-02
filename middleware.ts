@@ -9,9 +9,9 @@ export const config = {
 export async function middleware(req: NextRequest) {
     try {
         const pathname = req.nextUrl.pathname;
-        console.log("Environment:", process.env.NODE_ENV);
-        console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
-        console.log("Request URL:", req.url);
+        // console.log("Environment:", process.env.NODE_ENV);
+        // console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
+        // console.log("Request URL:", req.url);
 
         const token = await getToken({
             req,
