@@ -24,9 +24,9 @@ const FormCreateTodo = ({ handleCreateTodo }: handleCreateTodoPros) => {
         else document.body.style.overflowY = "auto";
     }, [createTodoAction]);
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>, still: boolean) {
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>, display: boolean) {
         handleCreateTodo(e);
-        if (!still) setCreateTodoAction({ display: false });
+        if (!display) setCreateTodoAction({ display: false });
     }
 
     return (

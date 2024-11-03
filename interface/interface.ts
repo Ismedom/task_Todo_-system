@@ -17,7 +17,7 @@ export interface todoInforType {
     check: boolean;
     actions: string;
     deadline?: string;
-    createdAt?: string;
+    createdAt?: Date | string;
     updatedAt?: string;
 }
 

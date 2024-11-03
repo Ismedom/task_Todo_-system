@@ -7,14 +7,13 @@ export default function UseSocket() {
     const [tasks, setTasks] = useState<any[]>([]);
     const socketRef = useRef<Socket | null>(null);
     const { data: session } = useSession();
+
     useEffect(() => {
         if (session?.user) {
             socketRef.current?.disconnect();
 
             socketRef.current = io(process.env.NEXT_PUBLIC_BACK_END_URL, {
                 transports: ["websocket", "polling"],
-                // reconnectionAttempts: 5,
-                // withCredentials: true,
                 auth: {
                     userId: session.user.id,
                 },

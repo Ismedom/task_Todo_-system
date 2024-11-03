@@ -50,6 +50,7 @@ const Page = () => {
     function handleCreateTodo(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         addTodo(todoInfor);
+
         setTodoInfor({
             taskName: "",
             description: "",
@@ -60,6 +61,14 @@ const Page = () => {
             check: false,
         });
     }
+
+    // useEffect(() => {
+    //     setTodoInfor((prev) => ({
+    //         ...prev,
+    //         createdAt: new Date(),
+    //     }));
+    //     console.log(todoInfor);
+    // }, [todoInfor.deadline]);
 
     useEffect(() => {
         if (!onlineSearch || !(universalArray.length > 0)) {

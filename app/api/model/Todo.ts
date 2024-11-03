@@ -33,8 +33,16 @@ const TodoSchema = new mongoose.Schema(
         deadline: {
             type: String,
         },
+        createdAt: {
+            type: Date,
+            default: () => new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" })),
+        },
     },
-    { timestamps: true }
+    {
+        timestamps: {
+            currentTime: () => new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" })),
+        },
+    }
 );
 
 export default mongoose.models.Todo || mongoose.model("Todo", TodoSchema);

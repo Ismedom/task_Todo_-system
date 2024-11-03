@@ -19,7 +19,7 @@ export const initialTodoValue: todoInforType = {
     check: false,
     actions: "created",
     deadline: "",
-    createdAt: "",
+    createdAt: "" as string,
     updatedAt: "",
 };
 

@@ -38,10 +38,11 @@ export async function POST(req: NextRequest) {
             check: false,
             todoCategory,
         };
+
         const todo = await Todo.create(todoItem);
         return NextResponse.json(todo, { status: 201 });
-    } catch (error) {
-        console.log(error);
+    } catch {
+        // console.log(error);
         return NextResponse.json({ error: "Failed to create todo" }, { status: 500 });
     }
 }
