@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Todo from "../model/Todo";
 import dbConnect from "@/lib/connectDb";
 import { auth } from "../auth/[...nextauth]/option";
+import timeConvertInGMT from "@/functions/timeConvertGMT";
 // import timeConvertInGMT from "@/functions/timeConvertGMT";
 
 export async function GET() {
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest) {
             taskName,
             description,
             status,
-            deadline: deadline,
+            deadline: timeConvertInGMT(deadline),
             actions: "created",
             check: false,
             todoCategory,

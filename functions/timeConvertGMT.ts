@@ -1,9 +1,8 @@
-// //
+//
 
-// const timeConvertInGMT = (time: string): string => {
-//     const date = new Date(time);
+const timeConvertInGMT = (time: string): string => {
+    const date = new Date(time);
+    return date.toUTCString();
+};
 
-//     return date;
-// };
-
-// export default timeConvertInGMT;
+export default timeConvertInGMT;
