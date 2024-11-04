@@ -59,7 +59,9 @@ export default function SignInPage() {
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">{error}</div>
                 )}
                 {loading && (
-                    <div className="text-[14px] text-yellow-500">Checking if don't have accout will auto sign up</div>
+                    <div className="text-[14px] text-yellow-500">
+                        Checking if don&apos;t have accout will auto sign up
+                    </div>
                 )}
 
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
