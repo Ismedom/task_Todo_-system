@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import formatDate from "@/functions/formatDate";
 import { todoInforType } from "@/interface/interface";
+import timeConvertInGMT from "@/functions/timeConvertGMT";
 
 export default function ProductPage() {
     const { universalArray } = useContext(contextInfor);
@@ -49,8 +50,12 @@ export default function ProductPage() {
                         {detailItem.todoCategory}
                     </p>
                     <div className="flex flex-col space-y-2">
-                        <p className="text-sm text-gray-600">Created: {formatDate(detailItem.createdAt as string)}</p>
-                        <p className="text-sm text-gray-600">Updated: {formatDate(detailItem.updatedAt as string)}</p>
+                        <p className="text-sm text-gray-600">
+                            Created: {formatDate(timeConvertInGMT(detailItem.createdAt as string))}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                            Updated: {formatDate(timeConvertInGMT(detailItem.updatedAt as string))}
+                        </p>
                         <p className="text-sm text-gray-600">Deadline: {formatDate(detailItem.deadline as string)}</p>
                     </div>
                 </div>
