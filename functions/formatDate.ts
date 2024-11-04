@@ -1,8 +1,9 @@
 //
 
 function formatDate(timestamp: string, timeDisplay: boolean = true): string {
-    const date = new Date(timestamp);
-    console.log(new Date().toISOString());
+    const userTimezone = new Date().getTimezoneOffset() / 60;
+    const timestampFormatToGMT7 = timestamp + userTimezone.toString();
+    const date = new Date(timestampFormatToGMT7);
 
     function getOrdinalDay(day: number): string {
         if (day > 3 && day < 21) return day + "th";
