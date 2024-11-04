@@ -4,7 +4,7 @@ import { contextInfor } from "@/provider/Provider";
 import { Button, Input } from "@headlessui/react";
 import { signIn, useSession } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 export default function SignInPage() {
     const router = useRouter();
