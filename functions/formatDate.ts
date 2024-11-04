@@ -2,6 +2,7 @@
 
 function formatDate(timestamp: string, timeDisplay: boolean = true): string {
     const date = new Date(timestamp);
+    console.log(new Date().toISOString());
 
     function getOrdinalDay(day: number): string {
         if (day > 3 && day < 21) return day + "th";
