@@ -53,7 +53,7 @@ const authOptions = {
                         email: user.email,
                     };
                 } catch (error) {
-                    console.error("Authentication error:", error);
+                    // console.error("Authentication error:", error);
                     throw error;
                 }
             },

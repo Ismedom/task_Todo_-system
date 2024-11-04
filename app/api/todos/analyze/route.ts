@@ -9,9 +9,9 @@ export async function GET() {
         const completedTask = await Todo.countDocuments({ userId: session?.user.id, actions: "completed" });
         const incompleteTask = await Todo.countDocuments({ userId: session?.user.id, actions: "created" });
         const overDudeTask = await Todo.countDocuments({ userId: session?.user.id, actions: "uncompleted" });
-        const completedTask_percent = ((completedTask / AllTask) * 100).toFixed(2);
-        const incompleteTask_percent = ((incompleteTask / AllTask) * 100).toFixed(2);
-        const overDueTask_percent = ((overDudeTask / AllTask) * 100).toFixed(2);
+        const completedTask_percent = ((completedTask / (AllTask || 1)) * 100).toFixed(2);
+        const incompleteTask_percent = ((incompleteTask / (AllTask || 1)) * 100).toFixed(2);
+        const overDueTask_percent = ((overDudeTask / (AllTask || 1)) * 100).toFixed(2);
         const analyzeTasks = [
             {
                 title: "All Task",

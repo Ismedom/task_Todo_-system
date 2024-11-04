@@ -5,6 +5,7 @@ import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import CustomSpinner from "../loading/CustomSpinner";
 import { CheckIcon, ClockIcon, XIcon } from "lucide-react";
 import formatDate from "@/functions/formatDate";
+import timeConvertInGMT from "@/functions/timeConvertGMT";
 
 interface LoadingType {
     fetchTodoLoading: boolean;
@@ -147,7 +148,7 @@ const TodoCart = ({
                         </Link>
                     </div>
                     <h4 className="text-[11px] hover:text-[12px] hover:min-w-[90px] bottom-[10px] right-3 min-w-[80px]">
-                        {formatDate(deadline, false)}
+                        {formatDate(timeConvertInGMT(deadline), false)}
                     </h4>
                 </div>
             </article>

@@ -2,9 +2,9 @@
 
 import { contextInfor } from "@/provider/Provider";
 import { Button, Input } from "@headlessui/react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function SignInPage() {
     const router = useRouter();
@@ -13,6 +13,8 @@ export default function SignInPage() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const { setUniversalArray } = useContext(contextInfor);
+    const [loading, setLoading] = useState(false);
+    const { data: session, status } = useSession();
 
     const callbackUrl = searchParams.get("callbackUrl") || "/tasks";
 
@@ -28,16 +30,26 @@ export default function SignInPage() {
             });
 
             if (result?.error) {
-                setError("incrrected password");
+                setError("Incorrected password");
                 return;
             }
             setUniversalArray([]);
             router.push(callbackUrl);
         } catch {
+            setLoading(false);
             setError("An error occurred during sign in");
         }
     };
 
+    useEffect(() => {
+        if (status === "loading") return;
+
+        if (session) {
+            router.push("/tasks");
+        }
+    }, [session, status, router]);
+
+    if (session) return null;
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
             <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
@@ -45,6 +57,9 @@ export default function SignInPage() {
 
                 {error && (
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">{error}</div>
+                )}
+                {loading && (
+                    <div className="text-[14px] text-yellow-500">Checking if don't have accout will auto sign up</div>
                 )}
 
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -80,8 +95,9 @@ export default function SignInPage() {
 
                     <Button
                         type="submit"
+                        onClick={() => setLoading(true)}
                         className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
-                        Sign in
+                        {loading ? "Signing in... " : "Sign in"}
                     </Button>
                 </form>
             </div>

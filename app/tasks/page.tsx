@@ -114,7 +114,7 @@ const Page = () => {
                         setEditorVisibility,
                     }}
                 />
-                {universalArray.length > 0 && !category && !todoFilters ? (
+                {universalArray.length >= 10 && !category && !todoFilters ? (
                     <div className="flex justify-center py-6 pb-8">
                         <button
                             onClick={() => fetchMoreTodoHandler(pages)}

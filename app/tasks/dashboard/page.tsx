@@ -55,7 +55,7 @@ const page = () => {
                 </div>
             </div>
         );
-    if (error) return <div>Error</div>;
+    if (error) return <div>Error:{error}</div>;
 
     return (
         <div className="pr-4">

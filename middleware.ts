@@ -13,7 +13,6 @@ export async function middleware(req: NextRequest) {
         const token = await getToken({
             req,
             secret: process.env.NEXTAUTH_SECRET,
-            secureCookie: process.env.NODE_ENV === "production",
         });
 
         if (pathname === "/" && token?.email) {
@@ -36,10 +35,10 @@ export async function middleware(req: NextRequest) {
         // signInUrl.searchParams.set("callbackUrl", pathname);
 
         return NextResponse.redirect(signInUrl);
-    } catch {
-        // const errorUrl = new URL("/error", req.url);
-
+    } catch (error) {
+        // const errorUrl = new URL("/", req.url);
+        // console.log(error);
         return;
-        // .redirect(errorUrl);
+        //  NextResponse.redirect(errorUrl);
     }
 }
