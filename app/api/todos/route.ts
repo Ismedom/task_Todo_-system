@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
         await dbConnect();
         const session = await auth();
         const userId = session?.user?.id;
-        const timezone = new Date();
+        // const timezone = new Date();
         // console.log("time zone is :" + timezone.toUTCString());
 
         if (!session) {
