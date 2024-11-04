@@ -23,8 +23,6 @@ export async function POST(req: NextRequest) {
         await dbConnect();
         const session = await auth();
         const userId = session?.user?.id;
-        // const timezone = new Date();
-        // console.log("time zone is :" + timezone.toUTCString());
 
         if (!session) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -45,7 +43,6 @@ export async function POST(req: NextRequest) {
         const todo = await Todo.create(todoItem);
         return NextResponse.json(todo, { status: 201 });
     } catch {
-        // console.log(error);
         return NextResponse.json({ error: "Failed to create todo" }, { status: 500 });
     }
 }
