@@ -62,14 +62,6 @@ const Page = () => {
         });
     }
 
-    // useEffect(() => {
-    //     setTodoInfor((prev) => ({
-    //         ...prev,
-    //         createdAt: new Date(),
-    //     }));
-    //     console.log(todoInfor);
-    // }, [todoInfor.deadline]);
-
     useEffect(() => {
         if (!onlineSearch || !(universalArray.length > 0)) {
             fetchTodo();

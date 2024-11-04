@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useContext, useEffect } from "react";
 import { notificationContext } from "../layout";
-import timeConvertInGMT from "@/functions/timeConvertGMT";
 
 const NotificationDetails = () => {
     const { notificationArray } = useContext(contextInfor);
@@ -30,9 +29,7 @@ const NotificationDetails = () => {
                     {filterItem.taskName}
                 </h3>
                 <p className="text-gray-500 text-[15px]">{filterItem.description}</p>
-                <p className="text-gray-500 text-[15px] py-2">
-                    Deadline: {timeConvertInGMT(filterItem.deadline as string)}
-                </p>
+                <p className="text-gray-500 text-[15px] py-2">Deadline: {filterItem.deadline as string}</p>
                 <p className="text-red-400 mb-3 text-[15px] ">Don&apos;t see any activity!</p>
             </article>
             <div className="border-t border-t-gray-300 pt-3">

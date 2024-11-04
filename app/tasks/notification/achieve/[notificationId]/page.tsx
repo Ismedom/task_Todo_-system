@@ -1,6 +1,5 @@
 "use client";
 
-import timeConvertInGMT from "@/functions/timeConvertGMT";
 import { contextInfor } from "@/provider/Provider";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,9 +25,7 @@ const NotificationDetails = () => {
                         {filterItem.taskName}
                     </h3>
                     <p className="text-gray-500 text-[15px]">{filterItem.description}</p>
-                    <p className="text-gray-500 text-[15px] py-2">
-                        Deadline: {timeConvertInGMT(filterItem.deadline as string)}
-                    </p>
+                    <p className="text-gray-500 text-[15px] py-2">Deadline: {filterItem.deadline as string}</p>
                     <p className="text-red-400 mb-3 text-[15px] ">
                         You <span className="text-blue-500">checked</span> notification but task still not completed
                     </p>
