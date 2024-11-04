@@ -41,13 +41,13 @@ export default function SignInPage() {
         }
     };
 
-    useEffect(() => {
-        if (status === "loading") return;
+    // useEffect(() => {
+    //     if (status === "loading") return;
 
-        if (session) {
-            router.push("/tasks");
-        }
-    }, [session, status, router]);
+    //     if (session) {
+    //         router.push("/tasks");
+    //     }
+    // }, [session, status, router]);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
