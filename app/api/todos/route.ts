@@ -23,7 +23,9 @@ export async function POST(req: NextRequest) {
         await dbConnect();
         const session = await auth();
         const userId = session?.user?.id;
-        // console.log(userId);
+        const timezone = new Date().getTimezoneOffset();
+        console.log("time zone is :" + timezone);
+
         if (!session) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }

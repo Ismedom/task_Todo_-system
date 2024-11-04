@@ -9,8 +9,8 @@ import { useContext, useEffect, useState } from "react";
 export default function SignInPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("example@gmail.com");
+    const [password, setPassword] = useState("123");
     const [error, setError] = useState("");
     const { setUniversalArray } = useContext(contextInfor);
     const [loading, setLoading] = useState(false);
