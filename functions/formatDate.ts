@@ -1,9 +1,11 @@
 //
 
 function formatDate(timestamp: string, timeDisplay: boolean = true): string {
-    // const userTimezone = new Date().getTimezoneOffset() / 60;
+    const userTimezone = new Date().getTimezoneOffset() / 60;
+    const timestampFormatToGMT7 = new Date(timestamp).toUTCString() + (userTimezone * 2).toString();
 
-    const date = new Date(timestamp);
+    console.log(timestampFormatToGMT7);
+    const date = new Date(timestampFormatToGMT7);
     console.log(date);
 
     function getOrdinalDay(day: number): string {
