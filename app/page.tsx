@@ -2,9 +2,9 @@
 
 import { contextInfor } from "@/provider/Provider";
 import { Button, Input } from "@headlessui/react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function SignInPage() {
     const router = useRouter();
@@ -14,7 +14,7 @@ export default function SignInPage() {
     const [error, setError] = useState("");
     const { setUniversalArray } = useContext(contextInfor);
     const [loading, setLoading] = useState(false);
-    // const { data: session, status } = useSession();
+    const { data: session, status } = useSession();
 
     const callbackUrl = searchParams.get("callbackUrl") || "/tasks";
 
@@ -41,13 +41,11 @@ export default function SignInPage() {
         }
     };
 
-    // useEffect(() => {
-    //     if (status === "loading") return;
-
-    //     if (session) {
-    //         router.push("/tasks");
-    //     }
-    // }, [session, status, router]);
+    useEffect(() => {
+        if (session) {
+            router.push("/tasks");
+        }
+    }, [session, status, router]);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
