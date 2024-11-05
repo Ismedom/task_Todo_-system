@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { SetStateAction } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { BellIcon, GridIcon, InfoIcon, LayoutDashboard } from "lucide-react";
@@ -8,13 +8,9 @@ import Profile from "../ui/Profile";
 import SignOutButton from "./SignoutButton";
 import UseSocket from "@/hooks/useSocket";
 
-const NavigationBar = () => {
+const NavigationBar = ({ setIsOpenNavBar }: { setIsOpenNavBar?: React.Dispatch<SetStateAction<boolean>> }) => {
     const pathname = usePathname();
     const { tasks } = UseSocket();
-
-    // useEffect(() => {
-    //     console.log(tasks);
-    // }, [tasks]);
 
     const navbarData = [
         {
@@ -60,6 +56,7 @@ const NavigationBar = () => {
                     <Link
                         key={id}
                         href={href}
+                        onClick={() => setIsOpenNavBar && setIsOpenNavBar(false)}
                         className={`flex gap-2 items-center px-3 py-3 border-b border-b-gray-200 select-none md:py-4 rounded-l-md relative  ${
                             pathname === href
                                 ? "text-gray-100 border bg-blue-500"

@@ -1,28 +1,18 @@
-//
 "use client";
-
 import NotificationNav from "@/components/common/NotificationNav";
 import UseDeleteNotification from "@/hooks/notificationHook/useDeleteNotification";
 import UseupdateTodoStatus from "@/hooks/notificationHook/useupdateTodoStatus";
 import NotificationProvider from "@/provider/NotificationProvider";
-import React, { createContext } from "react";
+import { notificationContext } from "../../../context/notificationContext";
 
-interface InotificationContext {
-    updateTodoStatus: (id: string) => void;
-    deleteNotification: (id: string) => void;
-}
-const initialValue = {
-    updateTodoStatus: () => {},
-    deleteNotification: () => {},
-};
+import React from "react";
 
-export const notificationContext = createContext<InotificationContext>(initialValue);
-
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
     const updateTodoStatus = UseupdateTodoStatus();
     const deleteNotification = UseDeleteNotification();
 
     const notificationContextInfor = { updateTodoStatus, deleteNotification };
+
     return (
         <notificationContext.Provider value={notificationContextInfor}>
             <NotificationProvider>
@@ -37,4 +27,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default layout;
+export default Layout;

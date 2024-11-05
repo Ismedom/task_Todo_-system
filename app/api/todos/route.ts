@@ -5,7 +5,6 @@ import Todo from "../model/Todo";
 import dbConnect from "@/lib/connectDb";
 import { auth } from "../auth/[...nextauth]/option";
 import timeConvertInGMT from "@/functions/timeConvertGMT";
-// import timeConvertInGMT from "@/functions/timeConvertGMT";
 
 export async function GET() {
     try {

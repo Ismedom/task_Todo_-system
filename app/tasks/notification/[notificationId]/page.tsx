@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useContext, useEffect } from "react";
-import { notificationContext } from "../layout";
+import { notificationContext } from "../../../../context/notificationContext";
 
 const NotificationDetails = () => {
     const { notificationArray } = useContext(contextInfor);
