@@ -1,9 +1,11 @@
 import { auth } from "../../auth/[...nextauth]/option";
 import { NextResponse } from "next/server";
 import Todo from "../../model/Todo";
+import dbConnect from "@/lib/connectDb";
 
 export async function GET() {
     try {
+        await dbConnect();
         const session = await auth();
         const AllTask = await Todo.countDocuments({ userId: session?.user.id });
         const completedTask = await Todo.countDocuments({ userId: session?.user.id, actions: "completed" });

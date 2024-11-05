@@ -17,9 +17,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 const page = () => {
     const { dataAnalysis, error, fetchDataLoading } = AnalyzeTodo();
 
-    useEffect(() => {
-        console.log(dataAnalysis, error);
-    }, [dataAnalysis, error]);
+    useEffect(() => {}, [dataAnalysis, error]);
 
     if (fetchDataLoading)
         return (

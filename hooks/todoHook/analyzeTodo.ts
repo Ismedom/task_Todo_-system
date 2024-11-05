@@ -9,6 +9,7 @@ const AnalyzeTodo = () => {
         try {
             setFetchDataLoading(true);
             const response = await axios.get("/api/todos/analyze");
+
             setDataAnalysis(response.data);
         } catch (errors) {
             setFetchDataLoading(false);
