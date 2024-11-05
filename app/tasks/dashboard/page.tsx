@@ -61,7 +61,9 @@ const Dashboard = () => {
 
     return (
         <div className="pr-4">
-            <h3 className="my-4 pb-2 text-lg text-gray-500 border-b border-b-gray-400">Analyze Your Actions</h3>
+            <h3 className="my-4 pb-2 text-lg text-gray-500 border-b border-b-gray-400 font-semibold">
+                Analyze Your Works
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {dataAnalysis?.slice(0, 4).map((item: DataAnalysisItem, index: number) => (
                     <AnalyzeCard
