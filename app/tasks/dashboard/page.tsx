@@ -14,7 +14,7 @@ import React, { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const page = () => {
+const Dashboard = () => {
     const { dataAnalysis, error, fetchDataLoading } = AnalyzeTodo();
 
     useEffect(() => {}, [dataAnalysis, error]);
@@ -91,4 +91,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Dashboard;
