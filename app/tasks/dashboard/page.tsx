@@ -10,12 +10,16 @@ type DataAnalysisItem = {
 
 import AnalyzeCard from "@/components/card/AnalyzeCard";
 import AnalyzeTodo from "@/hooks/todoHook/analyzeTodo";
-import React from "react";
+import React, { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const page = () => {
     const { dataAnalysis, error, fetchDataLoading } = AnalyzeTodo();
+
+    useEffect(() => {
+        console.log(dataAnalysis, error);
+    }, [dataAnalysis, error]);
 
     if (fetchDataLoading)
         return (
