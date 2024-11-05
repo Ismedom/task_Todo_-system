@@ -65,7 +65,7 @@ const AnalyzeCard = ({
     return (
         <article
             id={id}
-            className={`flex flex-col ${getalignItem()} border border-gray-300 bg-gray-100 rounded-sm px-5 py-3 ${className}`}>
+            className={`flex flex-col ${getalignItem()} border border-gray-300 bg-gray-50 rounded-sm  shadow-sm px-5 py-3 ${className}`}>
             <h3 className="py-1 text-gray-700 w-max first-letter:uppercase">{title}</h3>
             <div className={`${getFontSize()} py-10 md:py-12 ${getStatusClass()}`}>
                 {dataType === "number" ? value : `${value}%`}
