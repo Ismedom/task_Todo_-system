@@ -21,9 +21,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </div>
             {/* for small screen  */}
             <div
-                className={`block ${
-                    isOpenNavBar ? "left-0" : "left-[-100%]"
-                } sm:hidden fixed sm:sticky top-0 h-[100vh] transition-all duration-100 overflow-hidden bg-gray-200 z-[1200]`}>
+                className={`block transform transition-transform duration-150 ease-in-out ${
+                    isOpenNavBar ? "-translate-x-0" : "-translate-x-full"
+                } sm:hidden fixed sm:sticky top-0 h-[100vh] overflow-hidden bg-gray-200 z-[1200]`}>
                 <NavigationBar setIsOpenNavBar={setIsOpenNavBar} />
             </div>
             <div className="py-2 md:py-4 px-4 sm:px-1">{children}</div>
