@@ -5,7 +5,6 @@ import Provider from "@/provider/Provider";
 import SessionWrapper from "@/provider/SessionWrapper";
 import { Suspense } from "react";
 import SkeletonLoader from "@/components/loading/SkelLoading";
-// import icon from "../"
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
