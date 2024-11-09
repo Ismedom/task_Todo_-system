@@ -18,8 +18,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Online todo list",
-    description: "online todo, task",
+    title: "Online tasktify",
+    description: "online todo, task, tasktify app",
 };
 
 export default function RootLayout({
