@@ -21,9 +21,6 @@ const geistMono = localFont({
 export const metadata: Metadata = {
     title: "Online todo list",
     description: "online todo, task",
-    icons: {
-        icon: "/favicon.webp",
-    },
 };
 
 export default function RootLayout({
